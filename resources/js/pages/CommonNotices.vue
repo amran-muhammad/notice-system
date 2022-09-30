@@ -146,6 +146,12 @@ export default {
             this.user = window.Laravel.user
         }
     },
+    beforeRouteEnter(to, from, next) {
+        if (!window.Laravel.user) {
+            window.location.href = "/login";
+        }
+        next();
+    },
    
     methods: {
         fileUpload($e){

@@ -100,7 +100,11 @@ class UserController extends Controller
         $user = Auth::user();
 
         if ($user) {
-            $teachers = User::where('type', 'Teacher')->get();
+            $teachers = array();
+            if($request->department == 'All'){
+                $teachers = User::where('type', 'Teacher')->get();
+            }
+            else $teachers = User::where('type', 'Teacher')->where('department',$request->department)->get();
             return response()->json([
                 'data' => $teachers
             ]);
@@ -255,7 +259,7 @@ class UserController extends Controller
                 })->get();
             } else if ($request->type == 'Teacher') {
                 $data = User::where(function ($query) use ($request) {
-                    $query->where('type', '=', $request->type);
+                    $query->where('type', '=', $request->type)->where('department',$request->department);
                 })->where(function ($query) use ($request) {
                     $query->where('name', '=', $request->search)
                         ->orWhere('email', '=', $request->search);

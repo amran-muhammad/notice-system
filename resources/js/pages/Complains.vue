@@ -232,11 +232,11 @@ export default {
         },
         deleteStudent() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.delete('/api/complains/delete', {
+                this.$axios.post('/api/complains/delete', {
                     id: this.edit_data.id
                 })
                     .then(response => {
-                        if (response.data.data) {
+                        if (response.data.data == 1) {
                             this.deleteModal = false
                             this.students.splice(this.editIndex, 1)
                             this.editIndex = -1

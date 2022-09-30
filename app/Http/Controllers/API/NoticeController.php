@@ -6,21 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use App\Models\Event;
 use App\Models\Complain;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
 class NoticeController extends Controller
 {
+    public function get_home_data(Request $request)
+    {
+        $notice = Notice::where('department_name', null)->orderBy('id','DESC')->limit(1)->get();  
+        $teacher = User::where('type', 'TEACHER')->orderBy('id','DESC')->limit(3)->get();  
+        return response()->json([
+            'notice' => $notice,
+            'teacher' => $teacher
+        ]);
+    }
     public function get_notices(Request $request)
     {
-        $user = Auth::user();
-
-        $data = array();
-        if ($user) {
-            $data = Notice::where('department_name', null)->orderBy('id','DESC')->get();
-        }
-        
+        $data = Notice::where('department_name', null)->orderBy('id','DESC')->get();  
         return response()->json([
             'data' => $data
         ]);
@@ -38,15 +42,22 @@ class NoticeController extends Controller
             'data' => $data
         ]);
     }
+    public function get_complains_count(Request $request)
+    {
+        $data = Complain::count();
+        $notification = false;
+        if($request->old_total < $data){
+            $notification = true;
+        }
+        return response()->json([
+            'data' => $notification,
+            'new_total' => $data
+        ]);
+    }
     public function get_events(Request $request)
     {
-        $user = Auth::user();
-
         $data = array();
-        if ($user) {
-            $data = Event::orderBy('id','DESC')->get();
-        }
-        
+        $data = Event::orderBy('id','DESC')->get();
         return response()->json([
             'data' => $data
         ]);
@@ -263,10 +274,10 @@ class NoticeController extends Controller
         $user = Auth::user();
         if ($user && $user->type == 'Admin'){
             
-            Complain::where('id', $request->id)->delete();
+            $data = Complain::where('id', $request->id)->delete();
             
             return response()->json([
-                'data' => true
+                'data' => $data
             ]);
         } else {
             return response()->json([

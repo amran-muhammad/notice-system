@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 27, 2022 at 10:29 PM
+-- Generation Time: Sep 30, 2022 at 11:59 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -61,15 +61,6 @@ CREATE TABLE `complains` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `complains`
---
-
-INSERT INTO `complains` (`id`, `complain`, `answer`, `created_at`, `updated_at`) VALUES
-(1, 'dfhdfhdhdfhdh', 'eryewr', '2022-09-27 06:35:06', '2022-09-27 06:39:32'),
-(2, 'Bus at ZIndabazar Point was not found at 9 am. today.\nDate is: 2 April 2022', 'Noted. Next time please  see notices about grsiopgrsigj ggergwer', '2022-09-27 07:08:20', '2022-09-27 07:09:21'),
-(3, 'Ajke bus paisi na. TIlagor point o. date: 3 nov 2022', 'Sorry. we wil provide notice if bus time changes', '2022-09-27 07:23:56', '2022-09-27 07:24:31');
-
 -- --------------------------------------------------------
 
 --
@@ -86,14 +77,6 @@ CREATE TABLE `events` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `events`
---
-
-INSERT INTO `events` (`id`, `title`, `image`, `description`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(3, 'Event 1', '/uploads/events/1664286037.png', 'Hello all', '2022-09-27', '2022-09-28', '2022-09-27 07:40:39', '2022-09-27 07:40:39'),
-(4, 'Test', '/uploads/events/1664286151.png', 'Test test test', '2022-09-27', '2022-09-28', '2022-09-27 07:42:32', '2022-09-27 07:42:32');
 
 -- --------------------------------------------------------
 
@@ -256,7 +239,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (6, 'Nayem Hasan', 'nayemhasan@gmail.com', NULL, '$2y$10$9c7DxW3f2KeZplMTFdiwkOh9URzhWEHNHGOavqLkDtqchU6SizcgS', NULL, '2022-05-20 05:54:42', '2022-09-27 04:45:13', NULL, 'BBA', '353544242', 'Student', 'Approved'),
 (7, 'Humayun Ahmed', 'humayun@gmail.com', NULL, '$2y$10$1USVp0xxmhm.ro5G.a93HeAhRLCZAluZ6PDorYkiZQE07JyEccFA.', NULL, '2022-05-20 05:57:31', '2022-09-27 04:45:18', NULL, 'EEE', '342424', 'Student', 'Approved'),
 (8, 'Shakib Khan', 'shakib@gmail.com', NULL, '$2y$10$lcbqb/jQZuIqc6qCGFNg0uJG0FuGQd15m0e/eTqtnlOaWIqj3gEjK', NULL, '2022-05-20 07:09:35', '2022-09-27 04:45:45', 'Masters', 'EEE', NULL, 'Teacher', 'Approved'),
-(9, 'Shadhin Bangla', 'shadhin@bangla.com', NULL, '$2y$10$qHyZyPpqYxPcsP5TFfC5PeKY6q9qeG5es75ckP42XR7fIFyRqGdKW', NULL, '2022-09-27 07:19:33', '2022-09-27 07:20:09', NULL, 'BBA', '5325235325', 'Student', 'Approved');
+(9, 'Shadhin Bangla', 'shadhin@bangla.com', NULL, '$2y$10$qHyZyPpqYxPcsP5TFfC5PeKY6q9qeG5es75ckP42XR7fIFyRqGdKW', NULL, '2022-09-27 07:19:33', '2022-09-27 07:20:09', NULL, 'BBA', '5325235325', 'Student', 'Approved'),
+(10, 'Abdur Rahman', 'abdurrahman@gmail.com', NULL, '$2y$10$EM.yUzOn05S0Q8m.pk3qUeP6..n/bK74sVhbOo73EelBf7Nuh8PVW', NULL, '2022-09-30 03:32:15', '2022-09-30 03:32:15', 'Honors & Masters', 'BBA', NULL, 'Teacher', 'Approved');
 
 --
 -- Indexes for dumped tables
@@ -340,7 +324,7 @@ ALTER TABLE `bookings`
 -- AUTO_INCREMENT for table `complains`
 --
 ALTER TABLE `complains`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -382,7 +366,7 @@ ALTER TABLE `schedules`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

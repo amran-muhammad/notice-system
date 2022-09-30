@@ -35,7 +35,7 @@ Route::get('teachers/all', [UserController::class, 'get_all_teacher'])->middlewa
 Route::get('students/all', [UserController::class, 'get_all_student'])->middleware('auth:sanctum');
 
 //Notices
-Route::get('notices/all', [NoticeController::class, 'get_notices'])->middleware('auth:sanctum');
+Route::get('notices/all', [NoticeController::class, 'get_notices']);
 Route::post('notices/search', [NoticeController::class, 'search_notices'])->middleware('auth:sanctum');
 Route::post('notices/file-upload', [NoticeController::class, 'file_upload'])->middleware('auth:sanctum');
 Route::post('notices/create', [NoticeController::class, 'create_notice'])->middleware('auth:sanctum');
@@ -51,7 +51,9 @@ Route::post('events/delete', [NoticeController::class, 'delete_event'])->middlew
 
 
 //Complain
+Route::get('notices/home', [NoticeController::class, 'get_home_data']);
+Route::get('complains/count', [NoticeController::class, 'get_complains_count']);
 Route::get('complains/all', [NoticeController::class, 'get_complains'])->middleware('auth:sanctum');
 Route::post('complains/create', [NoticeController::class, 'create_complain'])->middleware('auth:sanctum');
 Route::put('complains/update', [NoticeController::class, 'update_complain'])->middleware('auth:sanctum');
-Route::delete('complains/delete', [NoticeController::class, 'delete_complain'])->middleware('auth:sanctum');
+Route::post('complains/delete', [NoticeController::class, 'delete_complain'])->middleware('auth:sanctum');

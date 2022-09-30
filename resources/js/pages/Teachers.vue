@@ -148,23 +148,11 @@
             <br>
             Total teachers: {{ teachers.length }}
             <br>
-            <div>
+            <div v-if="user.type=='Admin'">
                 <button @click="addModal = true" class="btn btn-sm btn-secondary">Add New Teacher</button>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group row">
-                <div class="col-md-8">
-                    <label for="search" class="col-sm-4 col-form-label text-md-right">Find A Teacher</label>
-                    <input id="search" type="text" class="form-control" v-model="search" autofocus autocomplete="off"
-                        placeholder="Enter teacher Email/Name">
-
-                    <button style="margin-top:10px" class="btn btn-success" @click="searchUser()">
-                        Search
-                    </button>
-                </div>
-            </div>
-        </div>
+       
         <br>
         <table class="table">
             <thead>
@@ -173,7 +161,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Course</th>
                     <th scope="col">Department</th>
-                    <th scope="col">Status</th>
+                    <th v-if="user.type=='Admin'" scope="col">Status</th>
                     <th v-if="user.type=='Admin'"  scope="col">Action</th>
                 </tr>
             </thead>
@@ -210,7 +198,7 @@
                     <td>{{ item.email }}</td>
                     <td>{{ item.course }}</td>
                     <td>{{ item.department }}</td>
-                    <td>{{ item.status }}</td>
+                    <td v-if="user.type=='Admin'">{{ item.status }}</td>
                     <td v-if="user.type=='Admin'">
                         <button v-if="item.status == 'Pending'" class="btn btn-sm btn-success"
                             @click="editStatusModalOn(item, index)">Activate</button>
@@ -230,6 +218,7 @@
 
 <script>
 import { ref } from 'vue';
+
 
 export default {
     name: "Teachers",
@@ -272,11 +261,17 @@ export default {
             this.user = window.Laravel.user
         }
     },
+    beforeRouteEnter(to, from, next) {
+        if (!window.Laravel.user) {
+            window.location.href = "/login";
+        }
+        next();
+    },
     
     methods: {
         get_all_teacher() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.get('/api/teachers/all')
+                this.$axios.get('/api/teachers/all?department='+this.$route.query.department)
                     .then(response => {
                         if (response.data.data) {
                             this.loader = false
@@ -377,23 +372,7 @@ export default {
                     });
             })
         },
-        searchUser() {
-            this.loader = true
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.get('/api/user/search' + '?search=' + search.value + '&type=Teacher')
-                    .then(response => {
-                        if (response.data.data) {
-                            this.loader = false
-                            this.teachers = response.data.data
-                        } else {
-                            console.log(response);
-                        }
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-            })
-        },
+      
         deleteTeacherOn(item, index) {
             this.deleteModal = true
             this.editIndex = index

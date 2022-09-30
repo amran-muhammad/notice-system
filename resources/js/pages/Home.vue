@@ -1,16 +1,19 @@
 <template>
-    <div class="row">
-        <h1>Home</h1>
+    <div>
+        <TopSection />
         <Slider />
+        <Footer />
     </div>
 </template>
 
 <script>
+import TopSection from '../components/TopSection.vue';
 import Slider from '../components/Slider.vue';
+import Footer from '../components/Footer.vue';
 export default {
     name: "Home",
     components: {
-        Slider
+        TopSection, Slider, Footer
     }   
 }
 </script>

@@ -1,32 +1,43 @@
 <template>
-    <div id="carouselExampleControls" class="main_image carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div v-for="(item,index) in events" :key="index">
-                <div :class="index==active ? 'carousel-item active': 'carousel-item'">
-                    <img class="d-block w-100" :src="item.image" alt="First slide">
+    <div>
+        <div>
+            <h1 class="custom_h1 text-center">UPCOMING HOLIDAY NOTICES</h1>
+            <div v-for="(item,index) in notice" :key="index">
+                <img class="image_2" :src="item.image" alt=""> 
+            </div>
+            <div class="main_image_2">
+                <a href="/common-notices" class="custom_button btn btn-secondary">View All</a>
+            </div>
+        </div>
+         
+       
+        <div class="main_image">
+            <h1 class="custom_h1 text-center">HONORABLE FACULTY MEMBERS</h1>
+            <div class="d-f">
+                <div v-for="(item,index) in teacher" :key="index">
+                    <img class="img_3" src="/images/avatar.png" alt=""> 
+                    <b>{{item.name}}</b>
+                    <br>
+                    <b>{{item.email}}</b>
+                    <br>
+                    <b>{{item.department}}</b>
                 </div>
             </div>
-            
+                
+           <a href="/teachers?department=All" class="custom_button btn btn-secondary">View All</a>
         </div>
-        <a @click="changeActive(-1)" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a @click="changeActive(1)" class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+
     </div>
 </template>
 <script>
 import {ref} from 'vue';
 export default {
-   
     data(){
         return {
             active: ref(0),
             slideIndex:1,
-            events:[]
+            notice:[],
+            teacher:[],
         }
     },
     created(){
@@ -34,19 +45,12 @@ export default {
     },
    
     methods:{
-        changeActive(n){
-            if(this.active == 0 && n == -1) this.active = this.events.length - 1
-            else if(n == -1) this.active = this.active - 1
-            else if(this.active == 0 && n == 1) this.active = this.active + 1
-            else if(this.active == this.events.length - 1 && n == 1) this.active = this.active - 1
-            else if(n == 1) this.active = this.active + 1
-        },
- 
         loadEvenets(){
-            this.$axios.get('/api/events/all')
+            this.$axios.get('/api/notices/home')
                     .then(response => {
-                        if (response.data.data) {
-                            this.events = response.data.data
+                        if (response.data) {
+                            this.notice = response.data.notice
+                            this.teacher = response.data.teacher
                         } else {
                             console.log(response);
                         }
@@ -61,10 +65,39 @@ export default {
 </script>
 
 <style>
-.main_image{
+    .d-f{
+        display: flex;
+    }
+    .img_3{
+        padding-bottom: 15px;
+        padding-right: 20px;
+        max-width: 180px;
+    }
+    .main_image{
+        margin-top: 40px;
         display: block;
         margin-left: auto;
         margin-right: auto;
         width: 50%;
+    }
+    .main_image_2{
+        margin-top: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+    .image_2{
+        margin-left: 430px;
+    }
+   
+    .custom_button{
+        margin-left: 235px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .custom_h1{
+        margin-bottom: 20px;
     }
 </style>
