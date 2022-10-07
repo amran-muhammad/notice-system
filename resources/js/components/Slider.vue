@@ -13,16 +13,18 @@
        
         <div class="main_image">
             <h1 class="custom_h1 text-center">HONORABLE FACULTY MEMBERS</h1>
-            <div class="d-f">
-                <div v-for="(item,index) in teacher" :key="index">
-                    <img class="img_3" src="/images/avatar.png" alt=""> 
-                    <b>{{item.name}}</b>
-                    <br>
-                    <b>{{item.email}}</b>
-                    <br>
-                    <b>{{item.department}}</b>
+
+            <div class="row">
+                    <div class="col-md-4 card" style="width: 13rem;" v-for="(item, index) in teacher" :key="index">
+                        <img class="card-img-top" :src="item.image" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <h5 class="card-title">Email: {{ item.email }}</h5>
+                            <p class="card-text">Course: {{ item.course }} , {{ item.department }}</p>
+                            
+                        </div>
+                    </div>
                 </div>
-            </div>
                 
            <a href="/teachers?department=All" class="custom_button btn btn-secondary">View All</a>
         </div>
@@ -67,11 +69,13 @@ export default {
 <style>
     .d-f{
         display: flex;
+        margin-left: 20px;
     }
     .img_3{
         padding-bottom: 15px;
         padding-right: 20px;
-        max-width: 180px;
+        max-width: 150px;
+        max-height: 200px;
     }
     .main_image{
         margin-top: 40px;

@@ -158,6 +158,16 @@ class NoticeController extends Controller
             'data' => '/'.'uploads/notices'.'/'.$fileName
         ],200);
     }
+    public function teacher_file_upload(Request $request){
+        $image = $request->file('old_file');
+        $fileName = time().'.'.$image->getClientOriginalExtension();
+    
+        $image->move(public_path('uploads/teacher'), $fileName);
+        return response()->json([
+            'msg' => 'Resume is uploaded succuessfully',
+            'data' => '/'.'uploads/teacher'.'/'.$fileName
+        ],200);
+    }
     public function event_file_upload(Request $request){
         $image = $request->file('old_file');
         $fileName = time().'.'.$image->getClientOriginalExtension();

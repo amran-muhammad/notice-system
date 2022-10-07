@@ -70,6 +70,13 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group row mt-1">
+                                <label for="name" class="col-sm-4 col-form-label text-md-right">Image Link</label>
+                                <div class="col-md-8">
+                                    <input id="name" type="file" accept="image/*" class="form-control"  @change="fileUpload" required
+                                        autofocus autocomplete="off">
+                                </div>
+                            </div>
 
                             <div class="form-group row mt-1">
                                 <label for="status" class="col-sm-4 col-form-label text-md-right">Status</label>
@@ -136,6 +143,14 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-group row mt-1">
+                                <label for="name" class="col-sm-4 col-form-label text-md-right">Image Link</label>
+                                <div class="col-md-8">
+                                    <input id="name" type="file" accept="image/*" class="form-control"  @change="editFileUpload" required
+                                        autofocus autocomplete="off">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -154,18 +169,9 @@
         </div>
        
         <br>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Teacher Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">Department</th>
-                    <th v-if="user.type=='Admin'" scope="col">Status</th>
-                    <th v-if="user.type=='Admin'"  scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody v-if="loader">
+        <div class="row">
+            
+            <div class="col-md-12" v-if="loader">
                 <div class="spinner-grow text-primary" role="status">
                     <span class="sr-only"></span>
                 </div>
@@ -191,28 +197,31 @@
                     <span class="sr-only">Loading...</span>
                 </div>
 
-            </tbody>
-            <tbody v-else>
-                <tr v-for="(item, index) in teachers" :key="index">
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.email }}</td>
-                    <td>{{ item.course }}</td>
-                    <td>{{ item.department }}</td>
-                    <td v-if="user.type=='Admin'">{{ item.status }}</td>
-                    <td v-if="user.type=='Admin'">
-                        <button v-if="item.status == 'Pending'" class="btn btn-sm btn-success"
-                            @click="editStatusModalOn(item, index)">Activate</button>
-                        <button v-else class="btn btn-sm btn-info"
-                            @click="editStatusModalOn(item, index)">Deactivate</button>
-                        <button style="margin-left:5px" class="btn btn-sm btn-secondary"
-                            @click="editTeacher(item, index)">Edit</button>
-                        <button style="margin-left:5px" class="btn btn-sm btn-danger"
-                            @click="deleteTeacherOn(item, index)">Delete</button>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
+            </div>
+            <div style="margin-top:10px;" v-else>
+                <div class="row">
+                    <div class="col-md-4 card" style="width: 18rem;" v-for="(item, index) in teachers" :key="index">
+                        <img class="card-img-top" :src="item.image" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <h5 class="card-title">Email: {{ item.email }}</h5>
+                            <p class="card-text">Course: {{ item.course }} , {{ item.department }}</p>
+                            <p v-if="user.type=='Admin'">{{ item.status }}</p>
+                            <div v-if="user.type=='Admin'">
+                                <button v-if="item.status == 'Pending'" class="btn btn-sm btn-success"
+                                    @click="editStatusModalOn(item, index)">Activate</button>
+                                <button v-else class="btn btn-sm btn-info"
+                                    @click="editStatusModalOn(item, index)">Deactivate</button>
+                                <button style="margin-left:5px" class="btn btn-sm btn-secondary"
+                                    @click="editTeacher(item, index)">Edit</button>
+                                <button style="margin-left:5px" class="btn btn-sm btn-danger"
+                                    @click="deleteTeacherOn(item, index)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -236,6 +245,7 @@ export default {
                 name: '',
                 email: '',
                 password: '',
+                image: '',
                 department: '',
                 course: '',
                 status: '',
@@ -245,6 +255,7 @@ export default {
                 id: '',
                 name: '',
                 email: '',
+                image: '',
                 password: '',
                 department: '',
                 course: '',
@@ -269,6 +280,42 @@ export default {
     },
     
     methods: {
+        fileUpload($e){
+            let form_image = new FormData()
+            form_image.append('old_file', $e.target.files[0])
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('/api/teachers/file-upload',form_image,{headers: { 'content-type': 'multipart/form-data' }})
+                    .then(response => {
+                        if (response.data.data) {
+                            this.form_data.image = response.data.data
+                        } else {
+                            console.log(response);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+
+        },
+        editFileUpload($e){
+            let form_image = new FormData()
+            form_image.append('old_file', $e.target.files[0])
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('/api/teachers/file-upload',form_image,{headers: { 'content-type': 'multipart/form-data' }})
+                    .then(response => {
+                        if (response.data.data) {
+                            this.edit_data.image = response.data.data
+                        } else {
+                            console.log(response);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+
+        },
         get_all_teacher() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.get('/api/teachers/all?department='+this.$route.query.department)
@@ -308,6 +355,10 @@ export default {
                 this.error = "Course is required!"
                 return
             }
+            else if (this.form_data.image == '') {
+                this.error = 'Please provide a event image link'
+                return
+            }
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/user/create/new/teacher', this.form_data)
                     .then(response => {
@@ -331,6 +382,7 @@ export default {
             this.edit_data.department = item.department
             this.edit_data.course = item.course
             this.edit_data.email = item.email
+            this.edit_data.image = item.image ? item.image : null
         },
         editStatusModalOn(item, index) {
             this.editStatusModal = true

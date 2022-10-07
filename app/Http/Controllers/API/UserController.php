@@ -161,6 +161,7 @@ class UserController extends Controller
             $teacher = new User();
             $teacher->name = $request->name;
             $teacher->email = $request->email;
+            $teacher->image = $request->image;
             $teacher->password = Hash::make($request->password);
             $teacher->type = 'Teacher';
             $teacher->course = $request->course;
@@ -179,59 +180,41 @@ class UserController extends Controller
     public function update_user(Request $request)
     {
         $user = Auth::user();
+        $object_user = array();
+        if (isset($request->name)) {
+            $object_user['name'] = $request->name;
+        }
+        if (isset($request->email)) {
+            $object_user['email'] = $request->email;
+        }
+        if (isset($request->image)) {
+            $object_user['image'] = $request->image;
+        }
+        if (isset($request->department)) {
+            $object_user['department'] = $request->department;
+        }
+        if (isset($request->status)) {
+            $object_user['status'] = $request->status;
+        }
+        if (isset($request->course)) {
+            $object_user['course'] = $request->course;
+        }
+        
+        if (isset($request->student_id)) {
+            $object_user['student_id'] = $request->student_id;
+        }
+       
+        if (isset($request->type)) {
+            $object_user['type'] = $request->type;
+        }
 
+        $teacher = User::where('id', $request->id)->first();
         if ($user && $user->type == 'Admin') {
-            $teacher = User::where('id', $request->id)->first();
-            $object_user = array();
-            if (isset($request->name)) {
-                $object_user['name'] = $request->name;
-            }
-            if (isset($request->email)) {
-                $object_user['email'] = $request->email;
-            }
-            if (isset($request->course)) {
-                $object_user['course'] = $request->course;
-            }
-            if (isset($request->department)) {
-                $object_user['department'] = $request->department;
-            }
-            if (isset($request->student_id)) {
-                $object_user['student_id'] = $request->student_id;
-            }
-            if (isset($request->status)) {
-                $object_user['status'] = $request->status;
-            }
-            if (isset($request->type)) {
-                $object_user['type'] = $request->type;
-            }
             $teacher->update($object_user);
             return response()->json([
                 'data' => $teacher
             ]);
         } else if ($user && $request->id == $user->id) {
-            $teacher = User::where('id', $request->id)->first();
-            $object_user = array();
-            if (isset($request->name)) {
-                $object_user['name'] = $request->name;
-            }
-            if (isset($request->email)) {
-                $object_user['email'] = $request->email;
-            }
-            if (isset($request->course)) {
-                $object_user['course'] = $request->course;
-            }
-            if (isset($request->department)) {
-                $object_user['department'] = $request->department;
-            }
-            if (isset($request->student_id)) {
-                $object_user['student_id'] = $request->student_id;
-            }
-            if (isset($request->status)) {
-                $object_user['status'] = $request->status;
-            }
-            if (isset($request->type)) {
-                $object_user['type'] = $request->type;
-            }
             $teacher->update($object_user);
             return response()->json([
                 'data' => $teacher

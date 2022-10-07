@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 30, 2022 at 11:59 AM
+-- Generation Time: Oct 07, 2022 at 09:49 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -60,6 +60,13 @@ CREATE TABLE `complains` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `complains`
+--
+
+INSERT INTO `complains` (`id`, `complain`, `answer`, `created_at`, `updated_at`) VALUES
+(9, 'figubg g hgghigh gid g', 'okay', '2022-10-07 11:13:06', '2022-10-07 11:14:12');
 
 -- --------------------------------------------------------
 
@@ -146,7 +153,7 @@ CREATE TABLE `notices` (
 --
 
 INSERT INTO `notices` (`id`, `user_id`, `department_name`, `class_name`, `section`, `title`, `image`, `created_at`, `updated_at`) VALUES
-(11, 1, NULL, NULL, NULL, 'University classes postponed on 16 December 2022', '/uploads/notices/1664305584.jpeg', '2022-09-27 13:06:26', '2022-09-27 13:06:26');
+(11, 1, NULL, NULL, NULL, 'University classes postponed on 16 December 2023', '/uploads/notices/1664305584.jpeg', '2022-09-27 13:06:26', '2022-10-07 11:18:30');
 
 -- --------------------------------------------------------
 
@@ -216,6 +223,7 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -232,15 +240,18 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `course`, `department`, `student_id`, `type`, `status`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$sodTC0jkzoWTIWTT.SO7Nuec.rsHQ5VOU8giTYiHwLUy1dKALPlhe', NULL, '2022-05-19 13:01:59', '2022-05-19 13:01:59', 'gggsdgsdgsdgs', NULL, NULL, 'Admin', 'Approved'),
-(4, 'Labiba J Nowrin', 'labiba@gmail.com', NULL, '$2y$10$hi7q3JkwIPvHQCujtCYXEOkkGamqmagaIqToxJHH4pKdb3QpijW3G', NULL, '2022-05-20 01:53:28', '2022-09-27 04:45:34', 'Honors', 'CSE', NULL, 'Teacher', 'Approved'),
-(5, 'Fatima Sruti', 'fatima@gmail.com', NULL, '$2y$10$pw32gu4ZNACJnWFDG5KaRecC/pERSi6Q5rxFl5ITP/piy60CUnK5y', NULL, '2022-05-20 01:54:29', '2022-09-27 04:45:07', NULL, 'CSE', '121212', 'Student', 'Approved'),
-(6, 'Nayem Hasan', 'nayemhasan@gmail.com', NULL, '$2y$10$9c7DxW3f2KeZplMTFdiwkOh9URzhWEHNHGOavqLkDtqchU6SizcgS', NULL, '2022-05-20 05:54:42', '2022-09-27 04:45:13', NULL, 'BBA', '353544242', 'Student', 'Approved'),
-(7, 'Humayun Ahmed', 'humayun@gmail.com', NULL, '$2y$10$1USVp0xxmhm.ro5G.a93HeAhRLCZAluZ6PDorYkiZQE07JyEccFA.', NULL, '2022-05-20 05:57:31', '2022-09-27 04:45:18', NULL, 'EEE', '342424', 'Student', 'Approved'),
-(8, 'Shakib Khan', 'shakib@gmail.com', NULL, '$2y$10$lcbqb/jQZuIqc6qCGFNg0uJG0FuGQd15m0e/eTqtnlOaWIqj3gEjK', NULL, '2022-05-20 07:09:35', '2022-09-27 04:45:45', 'Masters', 'EEE', NULL, 'Teacher', 'Approved'),
-(9, 'Shadhin Bangla', 'shadhin@bangla.com', NULL, '$2y$10$qHyZyPpqYxPcsP5TFfC5PeKY6q9qeG5es75ckP42XR7fIFyRqGdKW', NULL, '2022-09-27 07:19:33', '2022-09-27 07:20:09', NULL, 'BBA', '5325235325', 'Student', 'Approved'),
-(10, 'Abdur Rahman', 'abdurrahman@gmail.com', NULL, '$2y$10$EM.yUzOn05S0Q8m.pk3qUeP6..n/bK74sVhbOo73EelBf7Nuh8PVW', NULL, '2022-09-30 03:32:15', '2022-09-30 03:32:15', 'Honors & Masters', 'BBA', NULL, 'Teacher', 'Approved');
+INSERT INTO `users` (`id`, `name`, `email`, `image`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `course`, `department`, `student_id`, `type`, `status`) VALUES
+(1, 'Admin', 'admin@gmail.com', NULL, NULL, '$2y$10$sodTC0jkzoWTIWTT.SO7Nuec.rsHQ5VOU8giTYiHwLUy1dKALPlhe', NULL, '2022-05-19 13:01:59', '2022-05-19 13:01:59', 'gggsdgsdgsdgs', NULL, NULL, 'Admin', 'Approved'),
+(4, 'Labiba J Nowrin', 'labiba@gmail.com', '/uploads/teacher/1665169881.jpeg', NULL, '$2y$10$hi7q3JkwIPvHQCujtCYXEOkkGamqmagaIqToxJHH4pKdb3QpijW3G', NULL, '2022-05-20 01:53:28', '2022-10-07 13:11:23', 'Honors', 'CSE', NULL, 'Teacher', 'Approved'),
+(5, 'Fatima Sruti', 'fatima@gmail.com', NULL, NULL, '$2y$10$pw32gu4ZNACJnWFDG5KaRecC/pERSi6Q5rxFl5ITP/piy60CUnK5y', NULL, '2022-05-20 01:54:29', '2022-09-27 04:45:07', NULL, 'CSE', '121212', 'Student', 'Approved'),
+(6, 'Nayem Hasan', 'nayemhasan@gmail.com', NULL, NULL, '$2y$10$9c7DxW3f2KeZplMTFdiwkOh9URzhWEHNHGOavqLkDtqchU6SizcgS', NULL, '2022-05-20 05:54:42', '2022-09-27 04:45:13', NULL, 'BBA', '353544242', 'Student', 'Approved'),
+(7, 'Humayun Ahmed', 'humayun@gmail.com', NULL, NULL, '$2y$10$1USVp0xxmhm.ro5G.a93HeAhRLCZAluZ6PDorYkiZQE07JyEccFA.', NULL, '2022-05-20 05:57:31', '2022-09-27 04:45:18', NULL, 'EEE', '342424', 'Student', 'Approved'),
+(8, 'Shakib Khan', 'shakib@gmail.com', '/uploads/teacher/1665169057.png', NULL, '$2y$10$lcbqb/jQZuIqc6qCGFNg0uJG0FuGQd15m0e/eTqtnlOaWIqj3gEjK', NULL, '2022-05-20 07:09:35', '2022-10-07 12:57:39', 'Masters', 'EEE', NULL, 'Teacher', 'Approved'),
+(9, 'Shadhin Bangla', 'shadhin@bangla.com', NULL, NULL, '$2y$10$qHyZyPpqYxPcsP5TFfC5PeKY6q9qeG5es75ckP42XR7fIFyRqGdKW', NULL, '2022-09-27 07:19:33', '2022-09-27 07:20:09', NULL, 'BBA', '5325235325', 'Student', 'Approved'),
+(10, 'Abdur Rahman', 'abdurrahman@gmail.com', '/uploads/teacher/1665169231.png', NULL, '$2y$10$EM.yUzOn05S0Q8m.pk3qUeP6..n/bK74sVhbOo73EelBf7Nuh8PVW', NULL, '2022-09-30 03:32:15', '2022-10-07 13:00:32', 'Honors & Masters', 'BBA', NULL, 'Teacher', 'Approved'),
+(11, 'Arif Ahmed', 'arif@gmail.com', '/uploads/teacher/1665169919.jpeg', NULL, '$2y$10$bdfbcMT6KR4BDA/3Du3dK.nRrm0AKz3wfqHlN0pno3XDDxB14t0PG', NULL, '2022-10-07 11:20:53', '2022-10-07 13:12:00', 'Honors & Masters', 'CSE', NULL, 'Teacher', 'Approved'),
+(12, 'Sakil Ahmed', 'sakil@gmail.com', NULL, NULL, '$2y$10$2PrUv7WH93Nq3I/YWHM14eTzkC9gXN60CRLNsRDkjXTTk.SkYa/4O', NULL, '2022-10-07 11:22:13', '2022-10-07 11:22:24', NULL, 'English', '25552222', 'Student', 'Approved'),
+(13, 'Alisa Cross', 'alisa@cross.com', '/uploads/teacher/1665171441.png', NULL, '$2y$10$0k9ZsS4lDre08po4mX6oj.FAXtY520ky/sLBI38a66RCXtsHAOS8i', NULL, '2022-10-07 13:37:25', '2022-10-07 13:37:25', 'Honors & Masters', 'CSE', NULL, 'Teacher', 'Approved');
 
 --
 -- Indexes for dumped tables
@@ -324,13 +335,13 @@ ALTER TABLE `bookings`
 -- AUTO_INCREMENT for table `complains`
 --
 ALTER TABLE `complains`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -366,7 +377,7 @@ ALTER TABLE `schedules`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
