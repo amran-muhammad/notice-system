@@ -127,7 +127,7 @@
 
         <br>
         <div class="notice" v-for="(item, index) in notices" :key="index">
-            <img class="main_image" :src="item.image" alt="no photo">
+            <img class="main_image_event" :src="item.image" alt="no photo">
             <div class="action-button">
                 <h5>{{item.title}}</h5>
             </div>
@@ -401,11 +401,13 @@ export default {
         width: 50%;
         
     }
-    .main_image{
+    .main_image_event{
         display: block;
         margin-left: auto;
         margin-right: auto;
         width: 50%;
+        max-width: 400px;
+        max-height: 500px;
     }
     .details{
         padding: 5px;

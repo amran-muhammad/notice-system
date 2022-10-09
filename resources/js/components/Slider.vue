@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <h1 class="custom_h1 text-center">UPCOMING HOLIDAY NOTICES</h1>
+            <h1 class="custom_h1 text-center">UPCOMING NOTICES</h1>
             <div v-for="(item,index) in notice" :key="index">
                 <img class="image_2" :src="item.image" alt=""> 
             </div>
@@ -14,19 +14,20 @@
         <div class="main_image">
             <h1 class="custom_h1 text-center">HONORABLE FACULTY MEMBERS</h1>
 
-            <div class="row">
-                    <div class="col-md-4 card" style="width: 13rem;" v-for="(item, index) in teacher" :key="index">
+            <div class="d-f">
+                    <div class="card" style="width: 35rem;" v-for="(item, index) in teacher" :key="index">
                         <img class="card-img-top" :src="item.image" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">{{ item.name }}</h5>
-                            <h5 class="card-title">Email: {{ item.email }}</h5>
-                            <p class="card-text">Course: {{ item.course }} , {{ item.department }}</p>
+                            <h6>{{ item.name }}</h6>
+                            <h6>Email: {{ item.email }}</h6>
+                            <p>Course: {{ item.course }}</p>
+                            <p>Department: {{ item.department }}</p>
                             
                         </div>
                     </div>
                 </div>
                 
-           <a href="/teachers?department=All" class="custom_button btn btn-secondary">View All</a>
+           <a href="/teachers?department=All" class="custom_button2 btn btn-secondary">View All</a>
         </div>
 
     </div>
@@ -66,7 +67,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .d-f{
         display: flex;
         margin-left: 20px;
@@ -83,6 +84,7 @@ export default {
         margin-left: auto;
         margin-right: auto;
         width: 50%;
+        margin-bottom: 20px;
     }
     .main_image_2{
         margin-top: 10px;
@@ -93,13 +95,21 @@ export default {
     }
     .image_2{
         margin-left: 430px;
+        max-width: 400px;
+        max-width: 400px;
     }
    
     .custom_button{
         margin-left: 235px;
+        /* margin-top: 20px;
+        margin-bottom: 20px; */
+    }
+    .custom_button2{
+        margin-left: 280px;
         margin-top: 20px;
         margin-bottom: 20px;
     }
+    
     
     .custom_h1{
         margin-bottom: 20px;

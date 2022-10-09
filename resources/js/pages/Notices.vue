@@ -252,7 +252,7 @@
 
         <br>
         <div class="notice" v-for="(item, index) in notices" :key="index">
-            <img class="main_image" :src="item.image" alt="no photo">
+            <img class="main_image_notice" :src="item.image" alt="no photo">
             <div class="action-button">
                 <h5>{{item.title}}</h5>
             </div>
@@ -388,18 +388,12 @@ export default {
                 this.message = 'Please write a title'
                 return
             }
-            else if (this.form_data.class_name == '') {
-                this.message = 'Select a semester name'
-                return
-            }
+           
             else if (this.form_data.department_name == '') {
                 this.message = 'Select a department name'
                 return
             }
-            else if (this.form_data.section == '') {
-                this.message = 'Select a section name'
-                return
-            }
+           
             else if (this.form_data.image == '') {
                 this.message = 'Please provide a notice image link'
                 return
@@ -533,11 +527,13 @@ export default {
         width: 50%;
         
     }
-    .main_image{
+    .main_image_notice{
         display: block;
         margin-left: auto;
         margin-right: auto;
         width: 50%;
+        max-width: 400px;
+        max-height: 500px;
     }
     .details{
         padding: 5px;
