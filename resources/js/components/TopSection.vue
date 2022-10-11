@@ -11,10 +11,10 @@
         padding-top: 120px;
         text-align: center;
         font-weight: 900;
-        color: black;
+        color: #f5eaea;
     }
     .back_photo{
-        background-image: url("/images/metrolpolital-university.jpeg");
+        background-image: url("/images/background2.jpg");
         height: 330px;
     }
 </style>

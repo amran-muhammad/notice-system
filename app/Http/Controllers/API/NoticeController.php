@@ -15,7 +15,7 @@ class NoticeController extends Controller
 {
     public function get_home_data(Request $request)
     {
-        $notice = Notice::where('department_name', null)->orderBy('id','DESC')->limit(1)->get();  
+        $notice = Notice::where('department_name', null)->orderBy('id','DESC')->limit(1)->get();
         $teacher = User::where('type', 'TEACHER')->orderBy('id','DESC')->limit(3)->get();  
         return response()->json([
             'notice' => $notice,
