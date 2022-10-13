@@ -257,20 +257,32 @@
                 <h5>{{item.title}}</h5>
             </div>
             <div class="details">
-                <span v-if="item.department_name" ><li>Department : {{item.department_name}} </li></span>
-                <span v-else><li>Notice for all </li></span>
-                <span v-if="item.class_name" ><li>Semester Name: {{item.class_name}} </li></span>
-                <span v-if="item.section" ><li>Section: {{item.section}} </li></span>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Department</th>
+                            <th scope="col">Semester Name</th>
+                            <th scope="col">Section</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row"> <span v-if="item.department_name" >{{item.department_name}}</span>  </th>
+                        <td> <span  v-if="item.class_name" >{{item.class_name}}</span></td>
+                        <td><span v-if="item.section">{{item.section}}</span> </td>
+                        <td>
+                                <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-secondary"
+                                        @click="editNotice(item, index)">Edit</button>
+                                <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-danger"
+                                        @click="deleteNoticeOn(item, index)">Delete</button>
+                                <a :href="item.image" download style="margin-left:5px;"  class="btn btn-sm btn-primary">Download</a>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="action-button" v-if="user.type=='Teacher' || user.type=='Admin'">
-                <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-secondary"
-                        @click="editNotice(item, index)">Edit</button>
-                    <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-danger"
-                        @click="deleteNoticeOn(item, index)">Delete</button>
-            </div>
-            <div class="action-button">
-                <a :href="item.image" download class="btn btn-primary">Download</a>
-            </div>
+            
         </div>
         
     </div>
@@ -516,7 +528,6 @@ export default {
     .notice{
         margin-top: 20px;
         padding-top: 10px;
-        border: 2px solid rgb(106, 136, 141)
     }
     .action-button{
         padding: 15px;

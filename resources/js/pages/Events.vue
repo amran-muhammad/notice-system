@@ -128,23 +128,34 @@
         <br>
         <div class="notice" v-for="(item, index) in notices" :key="index">
             <img class="main_image_event" :src="item.image" alt="no photo">
-            <div class="action-button">
-                <h5>{{item.title}}</h5>
-            </div>
             <div class="details">
-                <span v-if="item.start_date" ><li>Start Date : {{item.start_date}} </li></span>
-                <span v-if="item.end_date" ><li>End Date: {{item.end_date}} </li></span>
-                <p v-if="item.description" >Description: {{item.description}}</p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">Section</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row"> <span>{{item.title}}</span>  </th>
+                        <td> <span v-if="item.start_date" >{{item.start_date}} </span></td>
+                        <td> <span v-if="item.end_date" >{{item.end_date}} </span></td>
+                        <td> <span v-if="item.description" >{{item.description}} </span></td>
+                        <td>
+                            <button v-if="user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-secondary"
+                                @click="editNotice(item, index)">Edit</button>
+                            <button v-if="user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-danger"
+                                    @click="deleteNoticeOn(item, index)">Delete</button>
+                                <a :href="item.image" download style="margin-left:5px;"  class="btn btn-sm btn-primary">Download</a>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="action-button" v-if="user.type=='Admin'">
-                <button style="margin-left:5px" class="btn btn-sm btn-secondary"
-                        @click="editNotice(item, index)">Edit</button>
-                    <button style="margin-left:5px" class="btn btn-sm btn-danger"
-                        @click="deleteNoticeOn(item, index)">Delete</button>
-            </div>
-            <div class="action-button">
-                <a :href="item.image" download class="btn btn-primary">Download</a>
-            </div>
+            
         </div>
         
     </div>
@@ -390,7 +401,6 @@ export default {
     .notice{
         margin-top: 20px;
         padding-top: 10px;
-        border: 2px solid rgb(106, 136, 141)
     }
     .action-button{
         padding: 15px;

@@ -85,21 +85,27 @@
         <br>
         <div class="notice" v-for="(item, index) in notices" :key="index">
             <img class="main_image_common" :src="item.image" alt="no photo">
-            <div class="action-button">
-                <h5>{{item.title}}</h5>
-            </div>
-   
-            <div class="action-button" v-if="user.type=='Teacher' || user.type=='Admin'">
-                <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-secondary"
-                        @click="editNotice(item, index)">Edit</button>
-                    <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-danger"
-                        @click="deleteNoticeOn(item, index)">Delete</button>
-            </div>
-            <div class="action-button">
-                <a :href="item.image" download class="btn btn-primary">Download</a>
-            </div>
+            <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row"> <span>{{item.title}}</span>  </th>
+                        <td>
+                                <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-secondary"
+                                        @click="editNotice(item, index)">Edit</button>
+                                <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-danger"
+                                        @click="deleteNoticeOn(item, index)">Delete</button>
+                                <a :href="item.image" download style="margin-left:5px;"  class="btn btn-sm btn-primary">Download</a>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
         </div>
-        
     </div>
 </template>
 
@@ -319,7 +325,6 @@ export default {
     .notice{
         margin-top: 20px;
         padding-top: 10px;
-        border: 2px solid rgb(106, 136, 141)
     }
     .action-button{
         padding: 15px;
