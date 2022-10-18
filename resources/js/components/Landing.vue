@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <h6>{{ item.name }}</h6>
                     <h6>Email: {{ item.email }}</h6>
-                    <p>Course: {{ item.course }}</p>
+                    <p>Program: {{ item.course }}</p>
                     <p>Department: {{ item.department }}</p>
                     
                 </div>
@@ -146,6 +146,23 @@ main {
 @media (max-width: 1028px) {
   header {
     text-align: center;
+  }
+}
+/* Mobile to Tablet  */
+@media (min-width: 320px) and (max-width: 767px) {
+  .submit {
+    margin-top: 20px;
+    width: 40%;
+    margin-left: 30%;
+  }
+}
+
+/* Tablet to Desktop */
+@media (min-width: 768px) {
+  .submit {
+    margin-top: 20px;
+    width: 40%;
+    margin-left: 30%;
   }
 }
 

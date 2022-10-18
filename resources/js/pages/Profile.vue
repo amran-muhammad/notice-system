@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="margin-top:20px;">
         <h1>Profile</h1>
         <div class="card card-default">
             <div  v-if="success_message != ''"

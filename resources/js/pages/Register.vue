@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" style="margin-top:20px;">
         <div class="row jutify-content-center">
             <div class="col-md-8">
                 <div v-if="error !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -41,19 +41,6 @@
                             </div>
 
                             <div class="form-group row mt-1">
-                                <label for="type" class="col-sm-4 col-form-label text-md-right">User Type</label>
-                                <div class="col-md-8">
-                                    <select @change="modeAssigned()" class="form-control" v-model="type">
-                                        <option value="">Choose...</option>
-                                        <option value="Teacher">Teacher</option>
-                                        <option value="Student">Student</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-
-                            <div class="form-group row mt-1">
                                 <label for="department" class="col-sm-4 col-form-label text-md-right">Department</label>
                                 <div class="col-md-8">
                                     <select class="form-control" v-model="department">
@@ -66,19 +53,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="mode == 'Teacher'" class="form-group row mt-1">
-                                <label for="course" class="col-sm-4 col-form-label text-md-right"> Course Name</label>
-                                <div class="col-md-8">
-                                    <select class="form-control" v-model="course">
-                                        <option value="">Choose...</option>
-                                        <option value="Honors & Masters">Honors & Masters</option>
-                                        <option value="Honors">Honors</option>
-                                        <option value="Masters">Masters</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div v-if="mode == 'Student'" class="form-group row mt-1">
+                            <div class="form-group row mt-1">
                                 <label for="student_id" class="col-sm-4 col-form-label text-md-right">Student ID</label>
                                 <div class="col-md-8">
                                     <input id="student_id" type="text" class="form-control" v-model="student_id"
@@ -103,8 +78,6 @@
                                     </small>
                                 </div>
                             </div>
-
-
                         </form>
                     </div>
                 </div>
@@ -115,20 +88,17 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-
 export default {
     data() {
         return {
             name: "",
             email: "",
             password: "",
-            type: "",
+            type: "Student",
             course: "",
             department: "",
             student_id: "",
-            error: null,
-            mode: ref('')
+            error: null
         }
     },
 
@@ -159,7 +129,7 @@ export default {
                 return
             }
             else if (this.type == "Teacher" && this.course == '') {
-                this.error = "Course is required!"
+                this.error = "Program is required!"
                 return
             }
 
@@ -187,15 +157,7 @@ export default {
                         });
                 })
             }
-        },
-
-        modeAssigned() {
-            if (this.type == 'Student') {
-                this.mode = 'Student'
-            } else {
-                this.mode = 'Teacher'
-            }
-        },
+        }
     },
 
 

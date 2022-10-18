@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row" style="margin-top:20px;">
         <Modal v-model="deleteModal" title="Are you sure delete the teacher?" @on-ok="deleteTeacher"
             @on-cancel="deleteModal = false" ok-text="Confirm" draggable sticky loading>
 
@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="form-group row mt-1">
-                                <label for="course" class="col-sm-4 col-form-label text-md-right"> Course Name</label>
+                                <label for="course" class="col-sm-4 col-form-label text-md-right"> Program Name</label>
                                 <div class="col-md-8">
                                     <select class="form-control" v-model="form_data.course">
                                         <option value="">Choose...</option>
@@ -133,7 +133,7 @@
                             </div>
 
                             <div class="form-group row mt-1">
-                                <label for="course" class="col-sm-4 col-form-label text-md-right"> Course Name</label>
+                                <label for="course" class="col-sm-4 col-form-label text-md-right"> Program Name</label>
                                 <div class="col-md-8">
                                     <select class="form-control" v-model="edit_data.course">
                                         <option value="">Choose...</option>
@@ -205,7 +205,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ item.name }}</h5>
                             <h5 class="card-title">Email: {{ item.email }}</h5>
-                            <p class="card-text">Course: {{ item.course }} , {{ item.department }}</p>
+                            <p class="card-text">Program: {{ item.course }} , {{ item.department }}</p>
                             <p v-if="user.type=='Admin'">{{ item.status }}</p>
                             <div v-if="user.type=='Admin'">
                                 <button v-if="item.status == 'Pending'" class="btn btn-sm btn-success"

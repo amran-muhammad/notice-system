@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row" style="margin-top:20px;">
         <Modal v-model="deleteModal" title="Are you sure delete the notice?" @on-ok="deleteNotice"
             @on-cancel="deleteModal = false" ok-text="Confirm" draggable sticky loading>
 
