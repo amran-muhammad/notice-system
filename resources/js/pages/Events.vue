@@ -115,9 +115,9 @@
 
         </Modal>
 
-        <h1>Events</h1>
+        <h1 class="md-m-l-20" >Events</h1>
 
-        <div v-if="user.type=='Admin'" class="col-md-6">
+        <div v-if="user.type=='Admin'" class="col-md-6 md-m-l-20">
             <div>
                 <button @click="addModalOn()" class="btn btn-sm btn-secondary">Add New Event</button>
             </div>
@@ -129,12 +129,13 @@
         <div class="notice" v-for="(item, index) in notices" :key="index">
             <img class="main_image_event" :src="item.image" alt="no photo">
             <div class="details">
-                <table class="table table-striped">
+                <table class="table md-m-5">
                     <thead>
                         <tr>
                             <th scope="col">Title</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">Section</th>
+                            <th scope="col">Start</th>
+                            <th scope="col">End</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -392,7 +393,7 @@ export default {
 
         addModalOn() {
             this.addModal = true
-        }
+        },
     },
 }
 </script>
@@ -425,5 +426,27 @@ export default {
         margin-left: auto;
         margin-right: auto;
         width: 50%;
+    }
+
+    @media (min-width: 320px) and (max-width: 767px) {
+        td{
+            max-width:150px;
+            word-wrap:break-word;
+        }
+        
+        .main_image_event {
+            display: block;
+            max-width: 400px;
+            max-height: 500px;
+        }
+        .md-m-5{
+            margin: 5%;
+        }
+        .md-m-l-20{
+            margin-left: 20px;
+        }
+        .md-m-l-10-percent{
+            margin-left:10%;
+        }
     }
 </style>

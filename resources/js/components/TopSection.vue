@@ -13,6 +13,16 @@
         font-weight: 900;
         color: #f5eaea;
     }
+    @media (min-width: 320px) and (max-width: 767px){
+        .front_text{
+            padding-top: 120px;
+            text-align: center;
+            font-weight: 900;
+            color: #f5eaea;
+            margin-left: 10px;
+            margin-right: 10px;
+        }  
+    }
     .back_photo{
         background-image: url("/images/background2.jpg");
         height: 330px;

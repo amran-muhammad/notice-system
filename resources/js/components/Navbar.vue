@@ -4,13 +4,13 @@
       <div id="navbar">
         <div id="logo" class="reverse">
           <div class="mobile-btn" style="font-size:30px;cursor:pointer; font-weight:bold;" @click="openNav()">&#9776;</div>
-          <div class="logo"><span>University</span>  Notice System</div>
+          <a href="/" class="logo"><span>University</span>  Notice System</a>
 
         </div>
         <div id="links">
           <router-link to="/" v-if="isLoggedIn">Home</router-link>
           <router-link to="/events" v-if="isLoggedIn">Events</router-link>
-                <router-link @click="updateNotification()" to="/complains" v-if="isLoggedIn">Complains <span v-if="notification" class="dot"></span></router-link>
+                <router-link @click="updateNotification()" to="/complains" v-if="isLoggedIn && type !='Teacher'">Complains <span v-if="notification" class="dot"></span></router-link>
                 <router-link to="/common-notices" v-if="isLoggedIn">Common Notices</router-link>
                 <router-link to="/notices" v-if="isLoggedIn">Notices</router-link>
                     <div class="dropdown" v-if="isLoggedIn">
@@ -38,7 +38,7 @@
       <a style="cursor:pointer;" class="closebtn" @click="closeNav()">&times;</a>
       <router-link to="/" v-if="isLoggedIn">Home</router-link>
           <router-link to="/events" v-if="isLoggedIn">Events</router-link>
-                <router-link @click="updateNotification()" to="/complains" v-if="isLoggedIn">Complains <span v-if="notification" class="dot"></span></router-link>
+                <router-link @click="updateNotification()" to="/complains" v-if="isLoggedIn && type !='Teacher'">Complains <span v-if="notification" class="dot"></span></router-link>
                 <router-link to="/common-notices" v-if="isLoggedIn">Common Notices</router-link>
                 <router-link to="/notices" v-if="isLoggedIn">Notices</router-link>
                     <div v-if="isLoggedIn">

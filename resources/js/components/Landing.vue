@@ -4,7 +4,7 @@
         <div class="mb-3">
             <h1 style="margin-bottom:40px" class="text-center">UPCOMING NOTICES</h1>
             <div v-for="(item,index) in notice" :key="index">
-                <img style="max-width:390px" :src="item.image" alt=""> 
+                <img class="mob-notice" style="max-width:390px" :src="item.image" alt=""> 
             </div>
         </div>
         <button @click="go_to_all_notice()" class="btn btn-secondary btn-lg submit">View All</button>
@@ -154,6 +154,10 @@ main {
     margin-top: 20px;
     width: 40%;
     margin-left: 30%;
+  }
+  .mob-notice{
+    margin-left: 15%;
+    margin-right: 15%;
   }
 }
 

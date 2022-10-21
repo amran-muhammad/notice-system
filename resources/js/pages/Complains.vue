@@ -49,10 +49,10 @@
 
         </Modal>
 
-        <div class="col-md-6">
+        <div class="col-md-6 md-m-l-10-percent">
             <h1>Complains</h1>
             <br>
-            Total complains: {{ students.length }}
+            <span> Total complains: {{ students.length }}</span> 
             <br>
             <div v-if="user.type == 'Student'" >
                 <button @click="addModal = true" class="btn btn-sm btn-secondary">Add New Complain</button>
@@ -63,7 +63,7 @@
         <div>
 
         </div>
-        <table class="table">
+        <table class="table md-m-5">
             <thead>
                 <tr>
                     <th scope="col">Complain</th>
@@ -100,7 +100,7 @@
             </tbody>
             <tbody v-else>
                 <tr v-for="(item, index) in students" :key="index">
-                    <td>{{ item.complain }}</td>
+                    <td><span>{{ item.complain }}</span> </td>
                     <td><span v-if="item.answer" ></span>{{ item.answer }}</td>
                     <td v-if="user.type=='Admin'">
                         <button style="margin-left:5px" class="btn btn-sm btn-secondary"
@@ -253,3 +253,23 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+
+@media (min-width: 320px) and (max-width: 767px) {
+    td{
+        max-width:150px;
+        word-wrap:break-word;
+    }
+   
+    .md-m-5{
+        margin: 5%;
+    }
+    .md-m-l-20{
+        margin-left: 20px;
+    }
+    .md-m-l-10-percent{
+        margin-left:10%;
+    }
+}
+</style>

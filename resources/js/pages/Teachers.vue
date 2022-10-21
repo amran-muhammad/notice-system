@@ -158,7 +158,7 @@
 
         </Modal>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mobile-card">
             <h1>Teachers</h1>
             <br>
             Total teachers: {{ teachers.length }}
@@ -169,7 +169,7 @@
         </div>
        
         <br>
-        <div class="row">
+        <div class="row mobile-table">
             
             <div class="col-md-12" v-if="loader">
                 <div class="spinner-grow text-primary" role="status">
@@ -200,7 +200,7 @@
             </div>
             <div style="margin-top:10px;" v-else>
                 <div class="row">
-                    <div class="col-md-4 card" style="width: 18rem;" v-for="(item, index) in teachers" :key="index">
+                    <div class="col-md-4 card mobile-card-margin" style="width: 18rem;" v-for="(item, index) in teachers" :key="index">
                         <img class="card-img-top" :src="item.image" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{ item.name }}</h5>
@@ -452,3 +452,23 @@ export default {
     },
 }
 </script>
+
+<style>
+.mobile-card-margin{
+        margin:10px;
+    }
+    .mobile-card{
+        margin-left:10%;
+    }
+    .mobile-table{
+        margin-left:10%;
+    }
+@media (min-width: 320px) and (max-width: 767px) {
+    .mobile-table{
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    
+    
+}
+</style>
