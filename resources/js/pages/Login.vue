@@ -59,12 +59,14 @@
 </template>
 
 <script>
+import { Notyf } from 'notyf';
 export default {
     data() {
         return {
             email: "",
             password: "",
-            error: null
+            error: null,
+            notyf: new Notyf()
         }
     },
 
@@ -79,6 +81,7 @@ export default {
                     })
                         .then(response => {
                             if (response.data.success) {
+                                this.notyf.success("Loggen in successfully!")
                                 this.$router.go('/login')
                             } else {
                                 this.error = response.data.message

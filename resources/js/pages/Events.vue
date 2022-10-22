@@ -115,9 +115,9 @@
 
         </Modal>
 
-        <h1 class="md-m-l-20" >Events</h1>
+        <h1 class="md-m-l-10-percent" >Events</h1>
 
-        <div v-if="user.type=='Admin'" class="col-md-6 md-m-l-20">
+        <div v-if="user.type=='Admin'" class="col-md-6 md-m-l-10-percent">
             <div>
                 <button @click="addModalOn()" class="btn btn-sm btn-secondary">Add New Event</button>
             </div>
@@ -428,6 +428,9 @@ export default {
         width: 50%;
     }
 
+    .md-m-l-10-percent{
+            margin-left:10%;
+        }
     @media (min-width: 320px) and (max-width: 767px) {
         td{
             max-width:150px;
@@ -445,8 +448,6 @@ export default {
         .md-m-l-20{
             margin-left: 20px;
         }
-        .md-m-l-10-percent{
-            margin-left:10%;
-        }
+        
     }
 </style>

@@ -4,7 +4,7 @@
       <div id="navbar">
         <div id="logo" class="reverse">
           <div class="mobile-btn" style="font-size:30px;cursor:pointer; font-weight:bold;" @click="openNav()">&#9776;</div>
-          <a href="/" class="logo"><span>University</span>  Notice System</a>
+          <a href="/" class="logo"><img class="logo-img" src="../../../assets/logo.png" alt=""></a>
 
         </div>
         <div id="links">
@@ -14,8 +14,8 @@
                 <router-link to="/common-notices" v-if="isLoggedIn">Common Notices</router-link>
                 <router-link to="/notices" v-if="isLoggedIn">Notices</router-link>
                     <div class="dropdown" v-if="isLoggedIn">
-                        <a @click="myFunction()" >Department</a>
-                        <div id="myDropdown" class="dropdown-content">
+                        <a @mouseover="myFunction()">Department</a>
+                        <div @mouseleave="myFunction()" id="myDropdown" class="dropdown-content">
                             <a href="/teachers?department=CSE">Department of CSE</a>
                             <a href="/teachers?department=BBA">Department of BBA</a>
                             <a href="/teachers?department=EEE">Department of EEE</a>
@@ -42,7 +42,7 @@
                 <router-link to="/common-notices" v-if="isLoggedIn">Common Notices</router-link>
                 <router-link to="/notices" v-if="isLoggedIn">Notices</router-link>
                     <div v-if="isLoggedIn">
-                        <a @click="myFunctionMobile()" >Department</a>
+                        <a @click="myFunctionMobile()">Department</a>
                         <div v-if="departmentsMobileOptions">
                             <a href="/teachers?department=CSE">Department of CSE</a>
                             <a href="/teachers?department=BBA">Department of BBA</a>
@@ -64,6 +64,7 @@
 </template>
 <script>
 import { ref } from 'vue';
+import { Notyf } from 'notyf';
 export default {
     data() {
             return {
@@ -74,6 +75,7 @@ export default {
                 notification: false,
                 departmentsMobileOptions: ref(false),
                 new_total: 0,
+                notyf:new Notyf()
             }
         },
         created() {
@@ -123,6 +125,7 @@ export default {
                     this.$axios.post('/api/logout')
                     .then(response => {
                         if(response.data.success) {
+                          this.notyf.success("You are logging out!")
                             window.location.href = "/"
                         } else {
                             console.log(response);
@@ -147,6 +150,11 @@ export default {
 </script>
 
 <style scoped>
+.logo-img{
+  max-width: 100px;
+  max-height: 85px;
+  margin: 5px;
+}
 .dot {
   height: 5px;
   width: 5px;

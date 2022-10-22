@@ -1,12 +1,14 @@
 <template>
     <main>
-      <div class="formula" id="form">
+      <div class="formula">
         <div class="mb-3">
             <h1 style="margin-bottom:40px" class="text-center">UPCOMING NOTICES</h1>
-            <div v-for="(item,index) in notice" :key="index">
-                <img class="mob-notice" style="max-width:390px" :src="item.image" alt=""> 
-            </div>
         </div>
+    </div>
+    <div v-for="(item,index) in notice" :key="index">
+        <img class="mob-notice" :src="item.image" alt=""> 
+    </div>
+    <div class="formula">
         <button @click="go_to_all_notice()" class="btn btn-secondary btn-lg submit">View All</button>
     </div>
   
@@ -84,7 +86,10 @@ export default {
 * {
   font-family: "Quicksand", sans-serif;
 }
-
+.mob-notice{
+    margin-left:30%;
+    min-width: 600px;
+  }
 /* Header */
 
 header {
@@ -120,9 +125,9 @@ main {
   margin-left: 15%;
 }
 .submit_2 {
-    margin-top: 20px;
-    width: 40%;
-    margin-left: 30%;
+  margin-top: 20px;
+  width: 14%;
+  margin-left: 44%;
 }
 
 

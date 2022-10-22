@@ -134,7 +134,7 @@
 
         </Modal>
 
-        <div class="col-md-6">
+        <div class="col-md-6 md-m-l-10-percent">
             <h1>Students</h1>
             <br>
             Total students: {{ students.length }}
@@ -417,3 +417,8 @@ export default {
     },
 }
 </script>
+<style>
+.md-m-l-10-percent{
+            margin-left:10%;
+        }
+</style>

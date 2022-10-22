@@ -74,9 +74,9 @@
 
         </Modal>
 
-        <h1>Notices</h1>
+        <h1 class="md-m-l-10-percent">Notices</h1>
 
-        <div v-if="user.type=='Teacher' || user.type=='Admin'" class="col-md-6">
+        <div v-if="user.type=='Teacher' || user.type=='Admin'" class="col-md-6 md-m-l-10-percent">
             <div>
                 <button @click="addModalOn()" class="btn btn-sm btn-secondary">Add New Notice</button>
             </div>
@@ -322,6 +322,9 @@ export default {
 </script>
 
 <style>
+    .md-m-l-10-percent{
+        margin-left:10%;
+    }
     .notice{
         margin-top: 20px;
         padding-top: 10px;

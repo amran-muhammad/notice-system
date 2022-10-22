@@ -214,7 +214,11 @@ export default {
 }
 .d-f{
     display:flex;
+    margin-left: 20%;
 }
+.md-m-l-10-percent{
+        margin-left:10%;
+    }
 /* Mobile to Tablet  */
 @media (min-width: 320px) and (max-width: 767px) {
     .d-f{
@@ -226,8 +230,6 @@ export default {
     .md-m-l-33-percent{
         margin-left:33%;
     }
-    .md-m-l-10-percent{
-        margin-left:10%;
-    }
+    
 }
 </style>

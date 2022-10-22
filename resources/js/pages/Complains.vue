@@ -49,7 +49,7 @@
 
         </Modal>
 
-        <div class="col-md-6 md-m-l-10-percent">
+        <div class="col-md-6 md-m-5">
             <h1>Complains</h1>
             <br>
             <span> Total complains: {{ students.length }}</span> 
@@ -255,7 +255,10 @@ export default {
 </script>
 
 <style scoped>
-
+.md-m-5{
+        margin-left: 10%;
+        margin-right: 10%;
+    }
 @media (min-width: 320px) and (max-width: 767px) {
     td{
         max-width:150px;
@@ -268,8 +271,6 @@ export default {
     .md-m-l-20{
         margin-left: 20px;
     }
-    .md-m-l-10-percent{
-        margin-left:10%;
-    }
+    
 }
 </style>
