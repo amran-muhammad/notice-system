@@ -85,16 +85,16 @@
         <br>
         <div class="notice" v-for="(item, index) in notices" :key="index">
             <img class="main_image_common" :src="item.image" alt="no photo">
-            <table class="table table-striped">
+            <table class="table table-striped custom_table">
                     <thead>
                         <tr>
-                            <th scope="col">Title</th>
+                            <th scope="col" class="custom_title">Title</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                        <th scope="row"> <span>{{item.title}}</span>  </th>
+                        <th scope="row custom_title"> <span>{{item.title}}</span>  </th>
                         <td>
                                 <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-secondary"
                                         @click="editNotice(item, index)">Edit</button>
@@ -353,4 +353,52 @@ export default {
         margin-right: auto;
         width: 50%;
     }
+    @media (min-width: 320px) and (max-width: 767px) {
+        .custom_table{
+            margin-left: 5%;
+            max-width:390px;
+           min-width:390px;
+        }
+        .custom_title{
+            max-width:100px;
+            min-width:100px;
+        }
+    }
+    @media (min-width: 1200px) and (max-width: 1421px) {
+        .main_image_common {
+            display: block;
+            width: 50%;
+            max-width: 400px;
+            max-height: 500px;
+            margin-left: 28%;
+        }
+        .custom_table{
+           margin-left:10%;
+           max-width:900px;
+           min-width:900px;
+        }
+        .custom_title{
+            max-width:665px;
+            min-width:665px;
+        }
+    }
+    @media (min-width: 1422px) and (max-width: 1921px) {
+        .main_image_common {
+            display: block;
+            width: 96%;
+            max-width: 750px;
+            max-height: 500px;
+            margin-left: 19%;
+        }
+        .custom_table{
+           margin-left:15%;
+           max-width:900px;
+           min-width:900px;
+        }
+        .custom_title{
+            max-width:665px;
+            min-width:665px;
+        }
+    }
+   
 </style>

@@ -21,10 +21,10 @@
             color: #f5eaea;
             margin-left: 10px;
             margin-right: 10px;
-        }  
+        }
     }
     .back_photo{
-        background-image: url("/images/background2.jpg");
+        background-image: url("../../../assets/background2.jpg");
         height: 330px;
     }
 </style>

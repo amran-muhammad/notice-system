@@ -5,8 +5,13 @@
             <h1 style="margin-bottom:40px" class="text-center">UPCOMING NOTICES</h1>
         </div>
     </div>
-    <div v-for="(item,index) in notice" :key="index">
-        <img class="mob-notice" :src="item.image" alt=""> 
+    <div v-if="notice.length>0">
+        <div v-for="(item,index) in notice" :key="index">
+          <img class="notice_big" :src="item.image" alt=""> 
+      </div>
+    </div>
+    <div v-else>
+        <img class="notice_big" src="../../../assets/default.jpg" alt=""> 
     </div>
     <div class="formula">
         <button @click="go_to_all_notice()" class="btn btn-secondary btn-lg submit">View All</button>
@@ -64,11 +69,6 @@ export default {
                 .then(response => {
                     if (response.data) {
                         this.notice = response.data.notice
-                        if(this.notice.length==0){
-                            this.notice.push({
-                                image:'/images/default.jpg'
-                            })
-                        }
                         this.teacher = response.data.teacher
                     } else {
                         console.log(response);
@@ -86,10 +86,7 @@ export default {
 * {
   font-family: "Quicksand", sans-serif;
 }
-.mob-notice{
-    margin-left:30%;
-    min-width: 600px;
-  }
+
 /* Header */
 
 header {
@@ -158,11 +155,21 @@ main {
   .submit {
     margin-top: 20px;
     width: 40%;
-    margin-left: 30%;
+    margin-left: 27%;
   }
-  .mob-notice{
+  .submit_2{
+    margin-top: 20px;
+    width: 58%;
+    margin-left: 19%;
+  }
+  .notice_big{
     margin-left: 15%;
     margin-right: 15%;
+    max-width: 268px;
+    max-height: 180px;
+  }
+  .text-center{
+    margin-right:6%;
   }
 }
 
@@ -172,6 +179,31 @@ main {
     margin-top: 20px;
     width: 40%;
     margin-left: 30%;
+  }
+}
+/* Tablet to Desktop */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .notice_big{
+    margin-left: 29%;
+    min-width: 590px;
+    max-width: 590px;
+  }
+  .submit_2 {
+    margin-top: 20px;
+    width: 21%;
+    margin-left: 41%;
+  }
+}
+@media (min-width: 1919px) {
+  .submit_2 {
+    margin-top: 20px;
+    width: 14%;
+    margin-left: 44%;
+  }
+  .notice_big{
+    margin-left: 30%;
+    min-width: 750px;
+    max-width: 750px;
   }
 }
 

@@ -169,7 +169,7 @@
         </div>
        
         <br>
-        <div class="row mobile-table">
+        <div class="row mobile-table" style="max-width: 1720px;">
             
             <div class="col-md-12" v-if="loader">
                 <div class="spinner-grow text-primary" role="status">
@@ -463,12 +463,9 @@ export default {
     .mobile-table{
         margin-left:10%;
     }
-@media (min-width: 320px) and (max-width: 767px) {
-    .mobile-table{
-        margin-left: 20%;
-        margin-right: 20%;
+    @media (min-width: 320px) and (max-width: 767px) {
+        .mobile-table{
+            margin-right: 20%;
+        }
     }
-    
-    
-}
 </style>

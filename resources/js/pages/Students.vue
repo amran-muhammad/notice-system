@@ -143,7 +143,7 @@
                 <button @click="addModal = true" class="btn btn-sm btn-secondary">Add New Student</button>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 md-m-l-10-percent">
             <div class="form-group row">
                 <div class="col-md-8">
                     <label for="search" class="col-sm-4 col-form-label text-md-right">Find A Student</label>
@@ -160,7 +160,7 @@
         <div>
 
         </div>
-        <table class="table">
+        <table class="table computer_student_table">
             <thead>
                 <tr>
                     <th scope="col">Student Name</th>
@@ -216,6 +216,74 @@
                             @click="deleteStudentOn(item, index)">Delete</button>
                     </td>
                 </tr>
+
+            </tbody>
+        </table>
+        <table class="table mobile_student_table">
+            <tbody v-if="loader">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only"></span>
+                </div>
+                <div class="spinner-grow text-secondary" role="status">
+                    <span class="sr-only"></span>
+                </div>
+                <div class="spinner-grow text-success" role="status">
+                    <span class="sr-only"></span>
+                </div>
+                <div class="spinner-grow text-danger" role="status">
+                    <span class="sr-only"></span>
+                </div>
+                <div class="spinner-grow text-warning" role="status">
+                    <span class="sr-only"></span>
+                </div>
+                <div class="spinner-grow text-info" role="status">
+                    <span class="sr-only"></span>
+                </div>
+                <div class="spinner-grow text-light" role="status">
+                    <span class="sr-only"></span>
+                </div>
+                <div class="spinner-grow text-dark" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+
+            </tbody>
+            <tbody v-else v-for="(item, index) in students" :key="index">
+                <tr>
+                    <td>Student Name</td>
+                    <td>{{ item.name }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ item.email }}</td>
+                </tr>
+                <tr>
+                    <td>Student ID</td>
+                    <td>{{ item.student_id }}</td>
+                </tr>
+                <tr>
+                    <td>Department</td>
+                    <td>{{ item.department }}</td>
+                </tr>
+
+                <tr>
+                    <td>Status</td>
+                    <td>{{ item.status }}</td>
+                </tr>
+
+                <tr>
+                    <td>Action</td>
+                    <td>
+                        <button v-if="item.status == 'Pending'" class="btn btn-sm btn-success"
+                            @click="editStatusModalOn(item, index)">Activate</button>
+                        <button v-else class="btn btn-sm btn-info"
+                            @click="editStatusModalOn(item, index)">Deactivate</button>
+                        <button style="margin-left:5px" class="btn btn-sm btn-secondary"
+                            @click="editStudent(item, index)">Edit</button>
+                        <button style="margin-left:5px" class="btn btn-sm btn-danger"
+                            @click="deleteStudentOn(item, index)">Delete</button>
+                    </td>
+                </tr>
+                
 
             </tbody>
         </table>
@@ -421,4 +489,20 @@ export default {
 .md-m-l-10-percent{
             margin-left:10%;
         }
+.mobile_student_table{
+    display: none;
+}
+.computer_student_table{
+    display: block;
+    margin-left: 10%;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .mobile_student_table{
+        display: block;
+        margin-left: 2%;
+    }
+    .computer_student_table{
+        display: none;
+    }
+}
 </style>
