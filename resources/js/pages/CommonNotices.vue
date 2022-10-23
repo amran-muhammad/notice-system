@@ -388,10 +388,10 @@ export default {
             width: 96%;
             max-width: 750px;
             max-height: 500px;
-            margin-left: 19%;
+            margin-left: 21%;
         }
         .custom_table{
-           margin-left:15%;
+           margin-left:17%;
            max-width:900px;
            min-width:900px;
         }
