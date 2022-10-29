@@ -34,14 +34,14 @@
                             <div class="form-group row mt-1">
                                 <label for="name" class="col-sm-4 col-form-label text-md-right">Start Date</label>
                                 <div class="col-md-8">
-                                    <input id="name" type="date" class="form-control" v-model="form_data.start_date" required autofocus
+                                    <input id="form_start_date" :min="new Date().toISOString().substr(0, 10)" type="date" class="form-control" v-model="form_data.start_date" required autofocus
                                         autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group row mt-1">
                                 <label for="name" class="col-sm-4 col-form-label text-md-right">End Date</label>
                                 <div class="col-md-8">
-                                    <input id="name" type="date" class="form-control" v-model="form_data.end_date" required autofocus
+                                    <input id="form_end_date" :min="new Date().toISOString().substr(0, 10)" type="date" class="form-control" v-model="form_data.end_date" required autofocus
                                         autocomplete="off">
                                 </div>
                             </div>
@@ -89,14 +89,14 @@
                             <div class="form-group row mt-1">
                                 <label for="name" class="col-sm-4 col-form-label text-md-right">Start Date</label>
                                 <div class="col-md-8">
-                                    <input id="name" type="date" class="form-control" v-model="edit_data.start_date" required autofocus
+                                    <input id="edit_start_date" :min="new Date().toISOString().substr(0, 10)" type="date" class="form-control" v-model="edit_data.start_date" required autofocus
                                         autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group row mt-1">
                                 <label for="name" class="col-sm-4 col-form-label text-md-right">End Date</label>
                                 <div class="col-md-8">
-                                    <input id="name" type="date" class="form-control" v-model="edit_data.end_date" required autofocus
+                                    <input id="edit_end_date"  :min="new Date().toISOString().substr(0, 10)" type="date" class="form-control" v-model="edit_data.end_date" required autofocus
                                         autocomplete="off">
                                 </div>
                             </div>
