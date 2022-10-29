@@ -181,7 +181,7 @@
                 <button @click="addModalOn()" class="btn btn-sm btn-secondary">Add New Notice</button>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 md-m-5">
             <div class="form-group row">
                 <div class="col-md-8">
                     <label for="search" class="col-sm-4 col-form-label text-md-right">Search Notice</label>
@@ -528,32 +528,41 @@ export default {
 .md-m-l-10-percent{
             margin-left:10%;
         }
-    .notice{
-        margin-top: 20px;
-        padding-top: 10px;
-    }
-    .action-button{
-        padding: 15px;
-        margin: 15px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-        
-    }
-    .main_image_notice{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-        max-width: 400px;
-        max-height: 500px;
-    }
-    .details{
-        padding: 5px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-    }
+.notice{
+    margin-top: 20px;
+    padding-top: 10px;
+}
+.action-button{
+    padding: 15px;
+    margin: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    
+}
+.main_image_notice{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    max-width: 400px;
+    max-height: 500px;
+}
+.details{
+    padding: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.md-m-5{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .md-m-5{
+        margin: 5%;
+    } 
+}
 </style>

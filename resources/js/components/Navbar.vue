@@ -13,9 +13,9 @@
                 <router-link @click="updateNotification()" to="/complains" v-if="isLoggedIn && type !='Teacher'">Complains <span v-if="notification" class="dot"></span></router-link>
                 <router-link to="/common-notices" v-if="isLoggedIn">Common Notices</router-link>
                 <router-link to="/notices" v-if="isLoggedIn">Notices</router-link>
-                    <div class="dropdown" v-if="isLoggedIn">
-                        <a @mouseover="myFunction()">Department</a>
-                        <div @mouseleave="myFunction()" id="myDropdown" class="dropdown-content">
+                    <div @mouseover="myFunction()" @mouseout="myFunction()" class="dropdown" v-if="isLoggedIn">
+                        <a>Teachers</a>
+                        <div id="myDropdown" class="dropdown-content">
                             <a href="/teachers?department=CSE">Department of CSE</a>
                             <a href="/teachers?department=BBA">Department of BBA</a>
                             <a href="/teachers?department=EEE">Department of EEE</a>
@@ -42,7 +42,7 @@
                 <router-link to="/common-notices" v-if="isLoggedIn">Common Notices</router-link>
                 <router-link to="/notices" v-if="isLoggedIn">Notices</router-link>
                     <div v-if="isLoggedIn">
-                        <a @click="myFunctionMobile()">Department</a>
+                        <a @click="myFunctionMobile()">Teachers</a>
                         <div v-if="departmentsMobileOptions">
                             <a href="/teachers?department=CSE">Department of CSE</a>
                             <a href="/teachers?department=BBA">Department of BBA</a>
@@ -112,6 +112,7 @@ export default {
             myFunction() { 
                 document.getElementById("myDropdown").classList.toggle("show");
             },
+            
             myFunctionMobile() {
                 this.departmentsMobileOptions = !this.departmentsMobileOptions
             },

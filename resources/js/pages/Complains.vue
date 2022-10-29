@@ -16,6 +16,17 @@
                 <div class="card card-default">
                     <div class="card-body">
                         <div>
+                            <div class="form-group row mt-1">
+                                <label for="status" class="col-sm-4 col-form-label text-md-right">Complain Type</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" v-model="form_data.type">
+                                        <option value="">Choose...</option>
+                                        <option value="Academic">Academic</option>
+                                        <option value="Administrative">Administrative</option>
+                                        <option value="Transportation">Transportation</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label for="name" class="col-sm-4 col-form-label text-md-right">Complain</label>
                                 <div class="col-md-8">
@@ -48,6 +59,35 @@
             </div>
 
         </Modal>
+        <div class="col-md-6 md-m-5">
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <label for="search" class="col-sm-4 col-form-label text-md-right">Search Complains</label>
+                    <div v-if="message_for_search != ''" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button @click="message_for_search = ''" type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+
+                            <strong>{{ message_for_search }}</strong>
+                        </div>
+                    <div class="form-group row mt-1">
+                        <div class="col-md-8">
+                            <select class="form-control" v-model="type">
+                                <option value="">Choose...</option>
+                                <option value="All">All</option>
+                                <option value="Academic">Academic</option>
+                                <option value="Administrative">Administrative</option>
+                                <option value="Transportation">Transportation</option>
+                               
+                            </select>
+                        </div>
+                    </div>
+
+                    <button style="margin-top:10px" class="btn btn-success" @click="searchComplains()">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <div class="col-md-6 md-m-5">
             <h1>Complains</h1>
@@ -67,6 +107,7 @@
             <thead>
                 <tr>
                     <th scope="col">Complain</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Answer</th>
                     <th v-if="user.type=='Admin'" scope="col">Action</th>
                 </tr>
@@ -101,10 +142,11 @@
             <tbody v-else>
                 <tr v-for="(item, index) in students" :key="index">
                     <td><span>{{ item.complain }}</span> </td>
+                    <td><span v-if="item.type" ></span>{{ item.type }}</td>
                     <td><span v-if="item.answer" ></span>{{ item.answer }}</td>
                     <td v-if="user.type=='Admin'">
                         <button style="margin-left:5px" class="btn btn-sm btn-secondary"
-                            @click="editStudent(item, index)">Edit</button>
+                            @click="editStudent(item, index)"> {{item.answer == null ? 'Write' : 'Edit'}} Answer</button>
                         <button style="margin-left:5px" class="btn btn-sm btn-danger"
                             @click="deleteStudentOn(item, index)">Delete</button>
                     </td>
@@ -122,6 +164,7 @@ export default {
     data() {
         return {
             error: ref(''),
+            message_for_search: ref(''),
             students: [],
             loader: true,
             addModal: ref(false),
@@ -131,14 +174,17 @@ export default {
             form_data: {
                 complain: '',
                 answer: '',
+                type: '',
             },
             edit_data: {
                 id: 0,
                 complain: '',
                 answer: '',
+                type: '',
             },
             editIndex: -1,
             user: {},
+            type: ref('')
         }
     },
     created() {
@@ -155,6 +201,28 @@ export default {
         next();
     },
     methods: {
+        searchComplains() {
+            if(this.type  == ''){
+                this.message_for_search = 'Please select a complain type'
+                return
+            }
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('/api/complains/search',{
+                    type: this.type
+                })
+                    .then(response => {
+                        if (response.data.data) {
+                            this.students = response.data.data
+                            this.message_for_search = ""
+                        } else {
+                            console.log(response);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+        },
         get_all_teacher() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.get('/api/complains/all')
@@ -172,7 +240,11 @@ export default {
             })
         },
         addStudent() {
-            if (this.form_data.complain == "") {
+            if (this.form_data.type == "") {
+                this.error = "complain type is required!"
+                return
+            }
+            else if (this.form_data.complain == "") {
                 this.error = "complain is required!"
                 return
             }
@@ -199,6 +271,7 @@ export default {
             this.edit_data.id = item.id
             this.edit_data.complain = item.complain
             this.edit_data.answer = item.answer
+            this.edit_data.type = item.type
         },
         editStatusModalOn(item, index) {
             this.editStatusModal = true
@@ -213,6 +286,7 @@ export default {
                         if (response.data.data) {
                             this.editModal = false
                             this.edit_data.answer = ''
+                            this.edit_data.type = ''
                             this.students[this.editIndex] = response.data.data
                         } else {
                             console.log(response);

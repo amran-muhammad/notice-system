@@ -36,6 +36,7 @@ Route::post('teachers/file-upload', [NoticeController::class, 'teacher_file_uplo
 Route::get('students/all', [UserController::class, 'get_all_student'])->middleware('auth:sanctum');
 
 //Notices
+Route::post('notices/update/data', [NoticeController::class, 'update_notice_status'])->middleware('auth:sanctum');
 Route::get('notices/all', [NoticeController::class, 'get_notices']);
 Route::post('notices/search', [NoticeController::class, 'search_notices'])->middleware('auth:sanctum');
 Route::post('notices/file-upload', [NoticeController::class, 'file_upload'])->middleware('auth:sanctum');
@@ -52,6 +53,7 @@ Route::post('events/delete', [NoticeController::class, 'delete_event'])->middlew
 
 
 //Complain
+Route::post('complains/search', [NoticeController::class, 'search_complains'])->middleware('auth:sanctum');
 Route::get('notices/home', [NoticeController::class, 'get_home_data']);
 Route::get('complains/count', [NoticeController::class, 'get_complains_count']);
 Route::get('complains/all', [NoticeController::class, 'get_complains'])->middleware('auth:sanctum');

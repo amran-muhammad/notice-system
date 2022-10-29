@@ -24,7 +24,14 @@ class NoticeController extends Controller
     }
     public function get_notices(Request $request)
     {
-        $data = Notice::where('department_name', null)->orderBy('id','DESC')->get();  
+        $user = Auth::user();
+
+        if($user && $user->type != 'Student' ){
+            $data = Notice::where('department_name', null)->orderBy('id','DESC')->get();  
+        }
+        else{
+            $data = Notice::where('department_name', null)->where('status', 'Approved')->orderBy('id','DESC')->get();  
+        }
         return response()->json([
             'data' => $data
         ]);
@@ -86,6 +93,29 @@ class NoticeController extends Controller
             'data' => $data
         ]);
     }
+    public function search_complains(Request $request)
+    {
+        $user = Auth::user();
+
+        $data = array();
+        if ($user) {
+            $search_data = $request->all();
+            $search_obj = array();
+            if(isset($search_data['type'])){
+               $search_obj['type'] = $search_data['type'];
+            }
+            if($search_data['type']=='All'){
+                $data = Complain::orderBy('id','DESC')->get();
+            }
+            else{
+                $data = Complain::where($search_obj)->orderBy('id','DESC')->get();
+            }
+        }
+        
+        return response()->json([
+            'data' => $data
+        ]);
+    }
 
     public function create_notice(Request $request)
     {
@@ -116,6 +146,7 @@ class NoticeController extends Controller
         if ($user && $user->type == 'Student') {
             $form = new Complain();
             $form->complain = $request->complain;
+            $form->type = $request->type;
             $form->save();
             return response()->json([
                 'data' => $form
@@ -192,6 +223,25 @@ class NoticeController extends Controller
             $form['section'] = $request->section;
             $form['image'] = $request->image;
             $exist->update($form);
+            return response()->json([
+                'data' => $exist
+            ]);
+            
+        } else {
+            return response()->json([
+                'data' => false
+            ]);
+        }
+    }
+    public function update_notice_status(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user && ($user->type == 'Admin')) {
+            $form = array();
+            $form['status'] = $request->status;
+            $exist = Notice::where('id', $request->id)->update($form);
+            $exist = Notice::where('id', $request->id)->first();
             return response()->json([
                 'data' => $exist
             ]);

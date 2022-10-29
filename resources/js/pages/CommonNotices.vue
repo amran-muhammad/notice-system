@@ -4,6 +4,10 @@
             @on-cancel="deleteModal = false" ok-text="Confirm" draggable sticky loading>
 
         </Modal>
+        <Modal v-model="editStatusModal" title="Are you sure update the status?" @on-ok="updateNoticeStatus"
+            @on-cancel="editStatusModal = false" ok-text="Confirm" draggable sticky loading>
+
+        </Modal>
         <Modal v-model="addModal" title="Add New Notice" @on-ok="addNotice" @on-cancel="addModal = false"
             ok-text="Save" draggable sticky loading>
             <div class="col-md-12">
@@ -89,19 +93,28 @@
                     <thead>
                         <tr>
                             <th scope="col" class="custom_title">Title</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" v-if="user.type=='Admin' || user.type=='Teacher'">Status</th>
+                            <th scope="col" class="custom_title">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                         <th scope="row custom_title"> <span>{{item.title}}</span>  </th>
-                        <td>
+                        <th scope="row" v-if="user.type=='Admin' || user.type=='Teacher'"> <span>{{item.status}}</span>  </th>
+                        <th scope="row custom_title" style="display: flex">
+                            <div v-if="user.type=='Admin'">
+                                <button v-if="item.status == 'Pending' || item.status == null" class="btn btn-sm btn-success"
+                                        @click="editStatusModalOn(item, index)">Approve</button>
+                                    <button v-else class="btn btn-sm btn-info"
+                                        @click="editStatusModalOn(item, index)">Deactivate</button>
+                            </div>
+
                                 <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-secondary"
                                         @click="editNotice(item, index)">Edit</button>
                                 <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-danger"
                                         @click="deleteNoticeOn(item, index)">Delete</button>
                                 <a :href="item.image" download style="margin-left:5px;"  class="btn btn-sm btn-primary">Download</a>
-                        </td>
+                        </th>
                         </tr>
                     </tbody>
                 </table>
@@ -117,6 +130,7 @@ export default {
     data() {
         return {
             deleteModal: ref(false),
+            editStatusModal: ref(false),
             addModal: ref(false),
             editModal: ref(false),
             notices: [],
@@ -127,14 +141,16 @@ export default {
                 section: '',
                 title: '',
                 image: '',
+                status: '',
             },
             edit_data: {
+                id: '',
                 class_name: '',
                 department_name: '',
                 section: '',
                 title: '',
                 image: '',
-                id: '',
+                status: '',
             },
             search_data: {
                 class_name: '',
@@ -195,6 +211,29 @@ export default {
                     });
             })
 
+        },
+        editStatusModalOn(item, index) {
+            this.editStatusModal = true
+            this.editIndex = index
+            this.edit_data.id = item.id
+            this.edit_data.status = item.status == 'Approved' ? 'Pending' : 'Approved'
+        },
+        updateNoticeStatus() {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('/api/notices/update/data', { id: this.edit_data.id, status: this.edit_data.status })
+                    .then(response => {
+                        if (response.data.data) {
+                            this.editStatusModal = false
+                            this.notices[this.editIndex].id = response.data.data.id
+                            this.notices[this.editIndex].status = response.data.data.status
+                        } else {
+                            console.log(response);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
         },
         get_all_notices() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
