@@ -210,8 +210,8 @@
                             @click="editStatusModalOn(item, index)">Activate</button>
                         <button v-else class="btn btn-sm btn-info"
                             @click="editStatusModalOn(item, index)">Deactivate</button>
-                        <button style="margin-left:5px" class="btn btn-sm btn-secondary"
-                            @click="editStudent(item, index)">Edit</button>
+                        <!-- <button style="margin-left:5px" class="btn btn-sm btn-secondary"
+                            @click="editStudent(item, index)">Edit</button> -->
                         <button style="margin-left:5px" class="btn btn-sm btn-danger"
                             @click="deleteStudentOn(item, index)">Delete</button>
                     </td>

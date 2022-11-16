@@ -24,7 +24,7 @@
         }
     }
     .back_photo{
-        background-image: url("../../../assets/background2.jpg");
-        height: 330px;
+        background-image: url("../../../assets/department.png");
+        height: 530px;
     }
 </style>

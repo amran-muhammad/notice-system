@@ -30,6 +30,7 @@ Route::post('user/delete', [UserController::class, 'delete_user'])->middleware('
 Route::post('user/create/new/teacher', [UserController::class, 'create_new_teacher'])->middleware('auth:sanctum');
 Route::post('user/create/new/student', [UserController::class, 'create_new_student'])->middleware('auth:sanctum');
 Route::post('user/update/data', [UserController::class, 'update_user'])->middleware('auth:sanctum');
+Route::post('user/update/password', [UserController::class, 'update_user_password'])->middleware('auth:sanctum');
 Route::get('user/search', [UserController::class, 'find_a_user'])->middleware('auth:sanctum');
 Route::get('teachers/all', [UserController::class, 'get_all_teacher'])->middleware('auth:sanctum');
 Route::post('teachers/file-upload', [NoticeController::class, 'teacher_file_upload'])->middleware('auth:sanctum');

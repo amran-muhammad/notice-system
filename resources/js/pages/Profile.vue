@@ -29,7 +29,6 @@
                 </div>
                 <div class="card-body">
                     <div>
-    
                         <div class="form-group row">
                             <label for="name" class="col-sm-4 col-form-label text-md-right">Name</label>
                             <div class="col-md-8">
@@ -39,7 +38,7 @@
                         </div>
     
                         <div class="form-group row mt-1">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
+                            <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail</label>
                             <div class="col-md-8">
                                 <input id="email" type="email" class="form-control" v-model="user.email" required autofocus
                                     autocomplete="off" placeholder="Enter your email">
@@ -95,6 +94,45 @@
                     </div>
                 </div>
             </div>
+            <div class="m-l-50 card card-default md-m-t-20">
+                
+                <div class="card-header">
+                    <h5>Change Your Pasword</h5>
+                </div>
+                <div  v-if="success_message_password != ''"
+                    class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button @click="success_message_password = ''" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    
+                    <strong>{{ success_message_password }}</strong>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-4 col-form-label text-md-right">Old Password</label>
+                            <div class="col-md-8">
+                                <input id="password1" type="password" class="form-control" v-model="password_data.old_password" required autofocus
+                                    autocomplete="off">
+                            </div>
+                        </div>
+    
+                        <div class="form-group row mt-1">
+                            <label for="password" class="col-sm-4 col-form-label text-md-right">New Password</label>
+                            <div class="col-md-8">
+                                <input id="password2" type="password" class="form-control" v-model="password_data.new_password" required autofocus
+                                    autocomplete="off">
+                            </div>
+                        </div>
+    
+                        <div class="form-group row mt-1 mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button style="margin-top:10px;" type="submit" class="btn btn-success" @click="updatePassword()">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -118,7 +156,13 @@ export default {
                 student_id: "",
                 image: "",
             },
+            password_data:{
+                email: '',
+                old_password: '',
+                new_password:''
+            },
             success_message: ref(''),
+            success_message_password: ref(''),
             photo: ref(''),
             imageEdit: ref(false),
         }
@@ -152,6 +196,26 @@ export default {
                     });
             })
 
+        },
+        updatePassword() {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.password_data.email = this.user.email;
+                
+                this.$axios.post('/api/user/update/password', this.password_data)
+                    .then(response => {
+                        if (response.data.data) {
+                            this.success_message_password = "Your password is changed successfully!"
+                            this.password_data.new_password = ''
+                            this.password_data.old_password = ''
+                        } else {
+                            this.success_message_password = "Your old password is incorrect!"
+                            console.log(response);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
         },
         updateUser() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {

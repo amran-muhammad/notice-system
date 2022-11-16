@@ -226,6 +226,32 @@ class UserController extends Controller
         }
     }
 
+    public function update_user_password(Request $request){
+        $response = array();
+        $response_code = 200;
+        $response["status"] = false;
+        if(isset($request->all()["email"])){
+            $user = User::where('email',$request->all()["email"])->first();
+            if($user){
+                if (Hash::check($request->all()['old_password'], $user->password)) {
+                    $password = Hash::make($request->all()['new_password']);
+                    User::where('email',$request->all()["email"])->update(['password'=>$password]);
+                    
+                    $data = true;
+                }else{
+                    $data = false;
+                }
+                
+            }else{
+                $data = false;
+            }  
+        }else{
+            $data = false;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
+    }
     public function find_a_user(Request $request)
     {
         $user = Auth::user();
