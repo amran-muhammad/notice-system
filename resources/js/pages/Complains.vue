@@ -146,9 +146,9 @@
                     <td><span v-if="item.answer" ></span>{{ item.answer }}</td>
                     <td v-if="user.type=='Admin'">
                         <button style="margin-left:5px" class="btn btn-sm btn-secondary"
-                            @click="editStudent(item, index)"> {{item.answer == null ? 'Write' : 'Edit'}} Answer</button>
+                            @click="editStudent(item, index)"> <i class="fa fa-edit"></i></button>
                         <button style="margin-left:5px" class="btn btn-sm btn-danger"
-                            @click="deleteStudentOn(item, index)">Delete</button>
+                            @click="deleteStudentOn(item, index)"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
 

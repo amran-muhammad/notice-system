@@ -24,6 +24,9 @@ use App\Http\Controllers\API\NoticeController;
 
 
 Route::post('login', [UserController::class, 'login']);
+Route::post('set-new-password', [UserController::class, 'set_new_password']);
+Route::post('send-verification-code', [UserController::class, 'send_verification_code']);
+Route::post('check-verification-code', [UserController::class, 'check_verification_code']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('user/delete', [UserController::class, 'delete_user'])->middleware('auth:sanctum');

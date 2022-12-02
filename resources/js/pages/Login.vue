@@ -17,8 +17,8 @@
                             <div class="form-group row">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
                                 <div class="col-md-8">
-                                    <input id="email" type="email" class="form-control" v-model="email" required
-                                        autofocus autocomplete="off" placeholder="Enter your email">
+                                    <input id="email" type="email" autocomplete="off"  class="form-control" v-model="email" required
+                                        autofocus placeholder="Enter your email">
                                 </div>
                             </div>
 
@@ -26,8 +26,8 @@
                             <div class="form-group row mt-1">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-8">
-                                    <input id="password" type="password" class="form-control" v-model="password"
-                                        required autocomplete="off" placeholder="Enter your password">
+                                    <input id="password" type="password" autocomplete="off"  class="form-control" v-model="password"
+                                        required placeholder="Enter your password">
                                 </div>
                             </div>
 
@@ -45,6 +45,11 @@
                                         Don't have any account yet? Please
                                         <router-link to="/register">Register</router-link>
                                     </small>
+                                    <small class="text-muted">
+                                        Forgot Password? Please
+                                        <router-link to="/reset-password"> Click </router-link>
+                                    </small>
+
                                 </div>
                             </div>
 

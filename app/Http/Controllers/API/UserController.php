@@ -4,10 +4,15 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use App\Mail\SendToken;
+use Illuminate\Support\Str;
+use Mail;
+use DB;
 
 class UserController extends Controller
 {
@@ -28,16 +33,13 @@ class UserController extends Controller
                     $message = "User login successfully";
                 } else {
                     $success = false;
-                    $message = "Unautorised";
+                    $message = "Entered Wrong Password!";
                 }
             }
         } else {
             $success = false;
-            $message = "Unautorised";
+            $message = "Entered Wrong Email!";
         }
-
-
-
 
         $response = [
             'success' => $success,
@@ -293,6 +295,75 @@ class UserController extends Controller
             return response()->json([
                 'data' => false
             ]);
+        }
+    }
+
+    public function send_verification_code(Request $request){
+        if(isset($request->all()["email"])){
+            $user = User::where('email',$request->all()["email"])->first();
+            if($user){
+                $random = Str::random(6);
+                // Send this $random to the email 
+                $details = [
+                    'random' => $random
+                ];
+                // Send email
+                // Mail::to($request->all()['email'])->send(new SendToken($details));
+                PasswordReset::where('email',$request->all()['email'])->delete();
+                PasswordReset::insert([
+                    'email'=> $request->all()['email'],
+                    'token'=> $random
+                ]);
+                return response()->json([
+                    'success' => true
+                ],200);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Wrong email entered!'
+                ],200);
+            }  
+        }
+        else{
+            return response()->json([
+                'success' => false,
+            ],401);
+        } 
+    }
+    public function check_verification_code(Request $request){
+        if(isset($request->all()["email"])){
+            $user = PasswordReset::where('email',$request->all()["email"])->where('token',$request->all()["code"])->first();
+            if($user){
+                return response()->json([
+                    'success' => true,
+                ],200);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Wrong code entered!'
+                ],401);
+            }  
+        }
+    }
+    public function set_new_password(Request $request){
+        if(isset($request->all()["email"])){
+            $user = User::where('email',$request->all()["email"])->first();
+            if($user){
+                    $password = Hash::make($request->all()['password']);
+                    User::where('email',$request->all()["email"])->update(['password'=>$password]);
+                    return response()->json([
+                        'success' => true,
+                    ],200);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Password reset fail, try again!'
+                ],401);
+            }  
+        }else{
+            return response()->json([
+                'success' => false,
+            ],401);
         }
     }
 }

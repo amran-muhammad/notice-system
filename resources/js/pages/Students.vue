@@ -29,8 +29,8 @@
                             <div class="form-group row mt-1">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
                                 <div class="col-md-8">
-                                    <input id="email" type="email" class="form-control" v-model="form_data.email"
-                                        required autofocus autocomplete="off" placeholder="Enter email">
+                                    <input id="email" type="email" autocomplete="off"  class="form-control" v-model="form_data.email"
+                                        required autofocus placeholder="Enter email">
                                 </div>
                             </div>
 
@@ -38,8 +38,8 @@
                             <div class="form-group row mt-1">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-8">
-                                    <input id="password" type="password" class="form-control"
-                                        v-model="form_data.password" required autocomplete="off"
+                                    <input id="password" type="password" autocomplete="off"  class="form-control"
+                                        v-model="form_data.password" required
                                         placeholder="Enter password">
                                 </div>
                             </div>
@@ -100,8 +100,8 @@
                             <div class="form-group row mt-1">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
                                 <div class="col-md-8">
-                                    <input id="email" type="email" class="form-control" v-model="edit_data.email"
-                                        required autofocus autocomplete="off" placeholder="Enter email">
+                                    <input id="email" type="email" autocomplete="off"  class="form-control" v-model="edit_data.email"
+                                        required autofocus placeholder="Enter email">
                                 </div>
                             </div>
 
@@ -364,6 +364,11 @@ export default {
             }
             else if (this.form_data.password == "") {
                 this.error = "Password is required!"
+                return
+            }
+
+            else if (this.form_data.password.length < 8) {
+                this.error = "Password must have 8 characters minimum!"
                 return
             }
             

@@ -40,8 +40,8 @@
                         <div class="form-group row mt-1">
                             <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail</label>
                             <div class="col-md-8">
-                                <input id="email" type="email" class="form-control" v-model="user.email" required autofocus
-                                    autocomplete="off" placeholder="Enter your email">
+                                <input id="email" type="email" autocomplete="off"  class="form-control" v-model="user.email" required autofocus
+                                 placeholder="Enter your email">
                             </div>
                         </div>
     
@@ -110,16 +110,16 @@
                         <div class="form-group row">
                             <label for="password" class="col-sm-4 col-form-label text-md-right">Old Password</label>
                             <div class="col-md-8">
-                                <input id="password1" type="password" class="form-control" v-model="password_data.old_password" required autofocus
-                                    autocomplete="off">
+                                <input id="password1" type="password" autocomplete="off"  class="form-control" v-model="password_data.old_password" required autofocus
+                                    >
                             </div>
                         </div>
     
                         <div class="form-group row mt-1">
                             <label for="password" class="col-sm-4 col-form-label text-md-right">New Password</label>
                             <div class="col-md-8">
-                                <input id="password2" type="password" class="form-control" v-model="password_data.new_password" required autofocus
-                                    autocomplete="off">
+                                <input id="password2" type="password" autocomplete="off"  class="form-control" v-model="password_data.new_password" required autofocus
+                                    >
                             </div>
                         </div>
     
@@ -198,6 +198,10 @@ export default {
 
         },
         updatePassword() {
+            if(this.password_data.new_password.length<8){
+                this.success_message_password = "New password must have 8 characters minimum!"
+                return
+            }
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.password_data.email = this.user.email;
                 
