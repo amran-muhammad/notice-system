@@ -4,12 +4,14 @@
         <div class="d-f">
 
             <div class="md-m-l-33-percent card" style="width: 11rem;">
-                <img v-if="imageEdit==false" class="photo card-img-top" :src="user.image ? user.image : '../../../assets/avatar.png'" alt="Card image cap">
+                <img v-if="(imageEdit==false && user.image)" class="photo card-img-top" :src="user.image" alt="Card image cap">
+                <img v-else-if="imageEdit==false" class="photo card-img-top" src="../../../assets/avatar.png" alt="Card image cap">
                 <div v-else>
                     <label class="custom_label">Click to upload a picture
                         <input style="display:none" accept="image/*" type="file" @change="fileUpload" >
                     </label>
-                    <img ondrop="fileUpload" class="photo card-img-top" :src="photo ? photo : '../../../assets/avatar.png'" alt="Card image cap">
+                    <img v-if="photo" ondrop="fileUpload" class="photo card-img-top" :src="photo" alt="Card image cap">
+                    <img v-else ondrop="fileUpload" class="photo card-img-top" src="../../../assets/avatar.png" alt="Card image cap">
                 </div>
                 <div class="card-body">
                   <button v-if="imageEdit==true" style="margin-right:10px;margin-left:40px;" class="btn btn-sm btn-danger card-text text-center" @click="imageEdit=false">Cancel</button>

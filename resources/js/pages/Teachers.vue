@@ -209,13 +209,13 @@
                             <p v-if="user.type=='Admin'">{{ item.status }}</p>
                             <div v-if="user.type=='Admin'">
                                 <button v-if="item.status == 'Pending'" class="btn btn-sm btn-success"
-                                    @click="editStatusModalOn(item, index)">Activate</button>
+                                    @click="editStatusModalOn(item, index)"><i class="fa fa-check"></i></button>
                                 <button v-else class="btn btn-sm btn-info"
-                                    @click="editStatusModalOn(item, index)">Deactivate</button>
+                                    @click="editStatusModalOn(item, index)">x</button>
                                 <button style="margin-left:5px" class="btn btn-sm btn-secondary"
-                                    @click="editTeacher(item, index)">Edit</button>
+                                    @click="editTeacher(item, index)"><i class="fa fa-edit"></i></button>
                                 <button style="margin-left:5px" class="btn btn-sm btn-danger"
-                                    @click="deleteTeacherOn(item, index)">Delete</button>
+                                    @click="deleteTeacherOn(item, index)"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
                     </div>

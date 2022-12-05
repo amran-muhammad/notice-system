@@ -106,14 +106,14 @@
                                 <button v-if="item.status == 'Pending' || item.status == null" class="btn btn-sm btn-success"
                                         @click="editStatusModalOn(item, index)">Approve</button>
                                     <button v-else class="btn btn-sm btn-info"
-                                        @click="editStatusModalOn(item, index)">Deactivate</button>
+                                        @click="editStatusModalOn(item, index)">x</button>
                             </div>
 
                                 <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-secondary"
-                                        @click="editNotice(item, index)">Edit</button>
+                                        @click="editNotice(item, index)"><i class="fa fa-edit"></i></button>
                                 <button v-if="user.id==item.user_id || user.type=='Admin'" style="margin-left:5px" class="btn btn-sm btn-danger"
-                                        @click="deleteNoticeOn(item, index)">Delete</button>
-                                <a :href="item.image" download style="margin-left:5px;"  class="btn btn-sm btn-primary">Download</a>
+                                        @click="deleteNoticeOn(item, index)"><i class="fa fa-trash"></i></button>
+                                <a :href="item.image" download style="margin-left:5px;"  class="btn btn-sm btn-primary"><i class="fa fa-download"></i></a>
                         </th>
                         </tr>
                     </tbody>

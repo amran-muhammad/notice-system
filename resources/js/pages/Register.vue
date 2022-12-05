@@ -39,6 +39,13 @@
                                         required placeholder="Enter your password">
                                 </div>
                             </div>
+                            <div class="form-group row mt-1">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                <div class="col-md-8">
+                                    <input id="password" type="password" autocomplete="off"  class="form-control" v-model="repassword"
+                                        required placeholder="Enter your password again">
+                                </div>
+                            </div>
 
                             <div class="form-group row mt-1">
                                 <label for="department" class="col-sm-4 col-form-label text-md-right">Department</label>
@@ -88,17 +95,20 @@
 </template>
 
 <script>
+import { Notyf } from 'notyf';
 export default {
     data() {
         return {
             name: "",
             email: "",
             password: "",
+            repassword: "",
             type: "Student",
             course: "",
             department: "",
             student_id: "",
-            error: null
+            error: null,
+            notyf: new Notyf()
         }
     },
 
@@ -118,6 +128,10 @@ export default {
             }
             else if (this.password.length < 8) {
                 this.error = "Password must have 8 characters minimum!"
+                return
+            }
+            else if (this.repassword.length != this.password) {
+                this.error = "Confirm password does not match!"
                 return
             }
             else if (this.type == "") {
@@ -152,6 +166,7 @@ export default {
                         .then(response => {
                             if (response.data.success) {
                                 window.location.href = "/login"
+                                this.notyf.success({message:"Your registration has been completed, after giving approval from administration you can access your account. The process will be held within 25-72 hours!", duration:5000})
                             } else {
                                 this.error = response.data.message
                             }

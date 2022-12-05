@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="custom_header">
     <nav>
       <div id="navbar">
         <div id="logo" class="reverse">
@@ -126,7 +126,7 @@ export default {
                     this.$axios.post('/api/logout')
                     .then(response => {
                         if(response.data.success) {
-                          this.notyf.success("You are logging out!")
+                          this.notyf.success({message:"You are logging out!", duration:5000})
                             window.location.href = "/"
                         } else {
                             console.log(response);
@@ -151,6 +151,10 @@ export default {
 </script>
 
 <style scoped>
+.custom_header{
+  position: sticky;
+  top:0;
+}
 .logo-img{
   max-width: 100px;
   max-height: 85px;

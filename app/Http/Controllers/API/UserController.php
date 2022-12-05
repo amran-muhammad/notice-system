@@ -53,18 +53,30 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->type = $request->type;
-            $user->student_id = $request->student_id;
-            $user->course = $request->course;
-            $user->department = $request->department;
-            $user->save();
+            $exist = User::where('email',$request->email)->first();
+            if($exist){
+                $success = false;
+                $message = "Email is already exist";
+            }
+            else if(!(filter_var($request->email, FILTER_VALIDATE_EMAIL))) {
+                $success = false;
+                $message = "Invalid email!";
+            }
+            else{
+                $user = new User();
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->password = Hash::make($request->password);
+                $user->type = $request->type;
+                $user->student_id = $request->student_id;
+                $user->course = $request->course;
+                $user->department = $request->department;
+                $user->save();
 
-            $success = true;
-            $message = "User register successfully";
+                $success = true;
+                $message = "User register successfully";
+            }
+            
         } catch (\Illuminate\Database\QueryException $ex) {
             $success = false;
             $message = $ex->getMessage();

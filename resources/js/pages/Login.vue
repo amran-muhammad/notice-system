@@ -45,6 +45,7 @@
                                         Don't have any account yet? Please
                                         <router-link to="/register">Register</router-link>
                                     </small>
+                                    <br>
                                     <small class="text-muted">
                                         Forgot Password? Please
                                         <router-link to="/reset-password"> Click </router-link>
@@ -86,7 +87,7 @@ export default {
                     })
                         .then(response => {
                             if (response.data.success) {
-                                this.notyf.success("Loggen in successfully!")
+                                this.notyf.success({message:"Loggen in successfully!",duration:5000})
                                 this.$router.go('/login')
                             } else {
                                 this.error = response.data.message

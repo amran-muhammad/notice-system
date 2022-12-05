@@ -207,13 +207,13 @@
                     <td>{{ item.status }}</td>
                     <td>
                         <button v-if="item.status == 'Pending'" class="btn btn-sm btn-success"
-                            @click="editStatusModalOn(item, index)">Activate</button>
+                            @click="editStatusModalOn(item, index)"><i class="fa fa-check"></i></button>
                         <button v-else class="btn btn-sm btn-info"
-                            @click="editStatusModalOn(item, index)">Deactivate</button>
+                            @click="editStatusModalOn(item, index)">x</button>
                         <!-- <button style="margin-left:5px" class="btn btn-sm btn-secondary"
                             @click="editStudent(item, index)">Edit</button> -->
                         <button style="margin-left:5px" class="btn btn-sm btn-danger"
-                            @click="deleteStudentOn(item, index)">Delete</button>
+                            @click="deleteStudentOn(item, index)"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
 
@@ -274,13 +274,13 @@
                     <td>Action</td>
                     <td>
                         <button v-if="item.status == 'Pending'" class="btn btn-sm btn-success"
-                            @click="editStatusModalOn(item, index)">Activate</button>
+                            @click="editStatusModalOn(item, index)"><i class="fa fa-check"></i></button>
                         <button v-else class="btn btn-sm btn-info"
-                            @click="editStatusModalOn(item, index)">Deactivate</button>
+                            @click="editStatusModalOn(item, index)">x</button>
                         <button style="margin-left:5px" class="btn btn-sm btn-secondary"
-                            @click="editStudent(item, index)">Edit</button>
+                            @click="editStudent(item, index)"><i class="fa fa-edit"></i></button>
                         <button style="margin-left:5px" class="btn btn-sm btn-danger"
-                            @click="deleteStudentOn(item, index)">Delete</button>
+                            @click="deleteStudentOn(item, index)"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
                 
