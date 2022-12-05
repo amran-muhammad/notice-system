@@ -1,5 +1,11 @@
 <template>
     <main>
+      <marquee>Dear students, the supplie exam will be held in January 2023. 
+Please pay your exam fee before 16 Dec, 2022.</marquee>
+<marquee>
+  "Dear students, University class has been closed in 16 Dec, 2022. 
+Apply your art / writing paper before 13 Dec, 2022."
+</marquee>
       <div class="formula">
         <div class="mb-3">
             <h1 style="margin-bottom:40px" class="text-center">UPCOMING NOTICES</h1>
