@@ -72,7 +72,7 @@
 
                             <div class="form-group row mt-1 mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button class="btn btn-success" @click="handleSubmit">
+                                    <button type="submit" class="btn btn-success" @click="handleSubmit">
                                         Register
                                     </button>
                                 </div>
@@ -121,12 +121,17 @@ export default {
             return false
         },
         handleSubmit(e) {
+            e.preventDefault()
             if (this.name == "") {
                 this.error = "Name is required!"
                 return
             }
             else if (this.email == "") {
                 this.error = "Email is required!"
+                return
+            }
+            else if (this.email.includes("gmailcom")) {
+                this.error = "Invalid Email Format!"
                 return
             }
             else if (this.ValidateEmail(this.email) == false) {
@@ -162,7 +167,6 @@ export default {
                 return
             }
             console.log("i'm here")
-            // e.preventDefault()
             if (this.password.length > 0) {
                 this.$axios.get('/sanctum/csrf-cookie').then(response => {
                     this.$axios.post('api/register', {
