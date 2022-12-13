@@ -26,8 +26,8 @@
                             <div class="form-group row mt-1">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
                                 <div class="col-md-8">
-                                    <input id="email" type="email" autocomplete="off"  class="form-control" v-model="email" required
-                                        autofocus placeholder="Enter your email">
+                                    <input id="email" type="email" autocomplete="off" class="form-control"
+                                        v-model="email" required autofocus placeholder="Enter your email">
                                 </div>
                             </div>
 
@@ -35,15 +35,16 @@
                             <div class="form-group row mt-1">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-8">
-                                    <input id="password" type="password" autocomplete="off"  class="form-control" v-model="password"
-                                        required placeholder="Enter your password">
+                                    <input id="password" type="password" autocomplete="off" class="form-control"
+                                        v-model="password" required placeholder="Enter your password">
                                 </div>
                             </div>
                             <div class="form-group row mt-1">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Confirm
+                                    Password</label>
                                 <div class="col-md-8">
-                                    <input id="password" type="password" autocomplete="off"  class="form-control" v-model="repassword"
-                                        required placeholder="Enter your password again">
+                                    <input id="password" type="password" autocomplete="off" class="form-control"
+                                        v-model="repassword" required placeholder="Enter your password again">
                                 </div>
                             </div>
 
@@ -71,7 +72,7 @@
 
                             <div class="form-group row mt-1 mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-success" @click="handleSubmit">
+                                    <button class="btn btn-success" @click="handleSubmit">
                                         Register
                                     </button>
                                 </div>
@@ -113,6 +114,12 @@ export default {
     },
 
     methods: {
+        ValidateEmail(mail) {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+                return true
+            }
+            return false
+        },
         handleSubmit(e) {
             if (this.name == "") {
                 this.error = "Name is required!"
@@ -120,6 +127,10 @@ export default {
             }
             else if (this.email == "") {
                 this.error = "Email is required!"
+                return
+            }
+            else if (this.ValidateEmail(this.email) == false) {
+                this.error = "Invalid Email Format!"
                 return
             }
             else if (this.password == "") {
@@ -130,7 +141,7 @@ export default {
                 this.error = "Password must have 8 characters minimum!"
                 return
             }
-            else if (this.repassword.length != this.password) {
+            else if (this.repassword != this.password) {
                 this.error = "Confirm password does not match!"
                 return
             }
@@ -150,8 +161,8 @@ export default {
                 this.error = "Program is required!"
                 return
             }
-
-            e.preventDefault()
+            console.log("i'm here")
+            // e.preventDefault()
             if (this.password.length > 0) {
                 this.$axios.get('/sanctum/csrf-cookie').then(response => {
                     this.$axios.post('api/register', {
@@ -166,7 +177,7 @@ export default {
                         .then(response => {
                             if (response.data.success) {
                                 window.location.href = "/login"
-                                this.notyf.success({message:"Your registration has been completed, after giving approval from administration you can access your account. The process will be held within 25-72 hours!", duration:5000})
+                                this.notyf.success({ message: "Your registration has been completed, after giving approval from administration you can access your account. The process will be held within 25-72 hours!", duration: 5000 })
                             } else {
                                 this.error = response.data.message
                             }
