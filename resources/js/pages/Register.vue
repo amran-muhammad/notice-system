@@ -181,7 +181,9 @@ export default {
                         .then(response => {
                             if (response.data.success) {
                                 this.notyf.success({ message: "Your registration has been completed, after giving approval from administration you can access your account. The process will be held within 25-72 hours!", duration: 5000 })
-                                window.location.href = "/login"
+                                setTimeout(() => {
+                                    window.location.href = "/login"
+                                }, 5000);
                             } else {
                                 this.error = response.data.message
                             }
