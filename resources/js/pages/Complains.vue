@@ -103,7 +103,7 @@
         <div>
 
         </div>
-        <table class="table md-m-5">
+        <table  style="max-width:max-content" class="table md-m-5">
             <thead>
                 <tr>
                     <th scope="col">Complain</th>
