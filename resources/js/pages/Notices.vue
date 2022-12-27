@@ -257,7 +257,7 @@
                 <h5>{{item.title}}</h5>
             </div>
             <div class="details">
-                <table class="table table-striped">
+                <table style="max-width:max-content" class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Department</th>

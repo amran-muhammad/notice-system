@@ -160,7 +160,7 @@
         <div>
 
         </div>
-        <table class="table computer_student_table">
+        <table style="max-width:max-content" class="table computer_student_table">
             <thead>
                 <tr>
                     <th scope="col">Student Name</th>
@@ -219,7 +219,7 @@
 
             </tbody>
         </table>
-        <table class="table mobile_student_table">
+        <table style="max-width:max-content" class="table mobile_student_table">
             <tbody v-if="loader">
                 <div class="spinner-grow text-primary" role="status">
                     <span class="sr-only"></span>

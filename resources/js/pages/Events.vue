@@ -129,7 +129,7 @@
         <div class="notice" v-for="(item, index) in notices" :key="index">
             <img class="main_image_event" :src="item.image" alt="no photo">
             <div class="details">
-                <table class="table md-m-5">
+                <table style="max-width:max-content" class="table md-m-5">
                     <thead>
                         <tr>
                             <th scope="col">Title</th>

@@ -7,6 +7,12 @@
     <title>University Notice System</title>
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+            html, body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+        </style>
 </head>
 <body>
     @if (Auth::check())

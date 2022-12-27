@@ -89,7 +89,7 @@
         <br>
         <div class="notice" v-for="(item, index) in notices" :key="index">
             <img class="main_image_common" :src="item.image" alt="no photo">
-            <table class="table table-striped custom_table">
+            <table style="max-width:max-content" class="table table-striped custom_table">
                     <thead>
                         <tr>
                             <th scope="col" class="custom_title">Title</th>
