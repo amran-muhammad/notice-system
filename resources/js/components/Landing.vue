@@ -193,7 +193,7 @@ main {
 }
 
 /* Tablet to Desktop */
-@media (min-width: 1200px) and (max-width: 1399px) {
+@media (min-width: 1200px) and (max-width: 1599px) {
   .notice_big {
     margin-left: 29%;
     min-width: 590px;
