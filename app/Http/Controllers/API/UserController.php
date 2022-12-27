@@ -320,7 +320,7 @@ class UserController extends Controller
                     'random' => $random
                 ];
                 // Send email
-                // Mail::to($request->all()['email'])->send(new SendToken($details));
+                Mail::to($request->all()['email'])->send(new SendToken($details));
                 PasswordReset::where('email',$request->all()['email'])->delete();
                 PasswordReset::insert([
                     'email'=> $request->all()['email'],
