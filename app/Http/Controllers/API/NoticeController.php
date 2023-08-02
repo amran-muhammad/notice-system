@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use App\Models\Event;
+use App\Models\Chat;
 use App\Models\Complain;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -372,6 +373,73 @@ class NoticeController extends Controller
             } else {
                 $data = Notice::with('user_details')->where('user_id', '=', $request->search)->orWhere('department', '=', $request->search)->get();
             }
+            return response()->json([
+                'data' => $data
+            ]);
+        } else {
+            return response()->json([
+                'data' => false
+            ]);
+        }
+    }
+
+    public function create_chat(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $form = new Chat();
+            $form->message = $request->message;
+            $form->receiver = $request->receiver;
+            $form->sender = $user->id;
+            $form->save();
+            return response()->json([
+                'data' => $form
+            ]);
+        } else {
+            return response()->json([
+                'data' => false
+            ]);
+        }
+    }
+    
+
+    public function get_chat(Request $request)
+    {
+        $user = Auth::user();
+        $teacher1Id = $user->id;
+        $admin = User::where("type","Admin")->first();
+        $adminId = $admin->id;
+        if ($user) {
+            $data = Chat::where(function ($query) use ($adminId, $teacher1Id) {
+                $query->where('sender', $adminId)->where('receiver', $teacher1Id);
+            })
+            ->orWhere(function ($query) use ($adminId, $teacher1Id) {
+                $query->where('sender', $teacher1Id)->where('receiver', $adminId);
+            })
+            ->get();
+            return response()->json([
+                'data' => $data
+            ]);
+        } else {
+            return response()->json([
+                'data' => false
+            ]);
+        }
+    }
+    public function get_chat_admin(Request $request)
+    {
+        $user = Auth::user();
+        $adminId = $user->id;
+        $teacher1Id = $request->teacher;
+        if ($user) {
+            $data = Chat::where(function ($query) use ($adminId, $teacher1Id) {
+                $query->where('sender', $adminId)->where('receiver', $teacher1Id);
+            })
+            ->orWhere(function ($query) use ($adminId, $teacher1Id) {
+                $query->where('sender', $teacher1Id)->where('receiver', $adminId);
+            })
+            ->get();
             return response()->json([
                 'data' => $data
             ]);

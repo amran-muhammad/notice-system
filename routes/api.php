@@ -64,3 +64,7 @@ Route::get('complains/all', [NoticeController::class, 'get_complains'])->middlew
 Route::post('complains/create', [NoticeController::class, 'create_complain'])->middleware('auth:sanctum');
 Route::put('complains/update', [NoticeController::class, 'update_complain'])->middleware('auth:sanctum');
 Route::post('complains/delete', [NoticeController::class, 'delete_complain'])->middleware('auth:sanctum');
+//chat
+Route::post('chats/create', [NoticeController::class, 'create_chat'])->middleware('auth:sanctum');
+Route::get('chats/get', [NoticeController::class, 'get_chat'])->middleware('auth:sanctum');
+Route::get('chats/admin/get', [NoticeController::class, 'get_chat_admin'])->middleware('auth:sanctum');
