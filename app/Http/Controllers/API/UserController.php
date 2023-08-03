@@ -128,6 +128,37 @@ class UserController extends Controller
             ]);
         }
     }
+    public function get_all_teacher_chat(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $adminId = $user->id;
+
+        $teachers = User::where('type', 'Teacher')
+            ->select('users.*')
+            ->leftJoin('chats', function ($join) use ($adminId) {
+                $join->on(function ($query) {
+                        $query->where('chats.sender', '=', DB::raw('users.id'))
+                            ->orWhere('chats.receiver', '=', DB::raw('users.id'));
+                    })
+                    ->where(function ($query) use ($adminId) {
+                        $query->where('chats.sender', '=', $adminId)
+                            ->orWhere('chats.receiver', '=', $adminId);
+                    });
+            })
+        ->orderBy('chats.created_at', 'desc')
+        ->distinct()
+        ->get();
+            return response()->json([
+                'data' => $teachers
+            ]);
+        } else {
+            return response()->json([
+                'data' => false
+            ]);
+        }
+    }
  
     public function get_all_student(Request $request)
     {

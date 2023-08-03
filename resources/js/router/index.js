@@ -12,6 +12,7 @@ import CommonNotices from '../pages/CommonNotices';
 import Events from '../pages/Events';
 import Complains from '../pages/Complains';
 import ResetPassword from '../pages/ResetPassword';
+import Message from '../pages/Message';
 
 export const routes = [
     {
@@ -68,6 +69,11 @@ export const routes = [
         name: 'reset-password',
         path: '/reset-password',
         component: ResetPassword
+    },
+    {
+        name: 'messages',
+        path: '/messages',
+        component: Message
     }
 ];
 

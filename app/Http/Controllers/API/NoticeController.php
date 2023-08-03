@@ -10,6 +10,7 @@ use App\Models\Complain;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 
 class NoticeController extends Controller
@@ -386,11 +387,14 @@ class NoticeController extends Controller
     public function create_chat(Request $request)
     {
         $user = Auth::user();
-
         if ($user) {
             $form = new Chat();
             $form->message = $request->message;
-            $form->receiver = $request->receiver;
+            if($request->receiver == "Admin"){
+                $admin = User::where("type","Admin")->first(); 
+                $form->receiver = $admin->id;
+            }
+            else $form->receiver = $request->receiver;
             $form->sender = $user->id;
             $form->save();
             return response()->json([
@@ -431,7 +435,26 @@ class NoticeController extends Controller
     {
         $user = Auth::user();
         $adminId = $user->id;
-        $teacher1Id = $request->teacher;
+        if($request->teacher){
+            $teacher1Id = $request->teacher;
+        }else{
+
+            $teacher = User::where('type', 'Teacher')
+                ->select('users.*')
+                ->leftJoin('chats', function ($join) use ($adminId) {
+                    $join->on(function ($query) {
+                            $query->where('chats.sender', '=', DB::raw('users.id'))
+                                ->orWhere('chats.receiver', '=', DB::raw('users.id'));
+                        })
+                        ->where(function ($query) use ($adminId) {
+                            $query->where('chats.sender', '=', $adminId)
+                                ->orWhere('chats.receiver', '=', $adminId);
+                        });
+                })
+            ->orderBy('chats.created_at', 'desc')
+            ->first();
+           $teacher1Id = $teacher->id; 
+        }
         if ($user) {
             $data = Chat::where(function ($query) use ($adminId, $teacher1Id) {
                 $query->where('sender', $adminId)->where('receiver', $teacher1Id);
