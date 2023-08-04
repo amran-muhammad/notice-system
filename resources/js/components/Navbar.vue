@@ -10,7 +10,7 @@
         <div id="links">
           <router-link to="/" v-if="isLoggedIn">Home</router-link>
           <router-link to="/events" v-if="isLoggedIn">Events</router-link>
-          <router-link to="/messages" v-if="isLoggedIn">Messages</router-link>
+          <router-link to="/messages" v-if="isLoggedIn && type!='Student'">Messages</router-link>
                 <router-link @click="updateNotification()" to="/complains" v-if="isLoggedIn && type !='Teacher'">Complains <span v-if="notification" class="dot"></span></router-link>
                 <router-link to="/common-notices" v-if="isLoggedIn">Common Notices</router-link>
                 <router-link to="/notices" v-if="isLoggedIn">Notices</router-link>
@@ -39,7 +39,7 @@
       <a style="cursor:pointer;" class="closebtn" @click="closeNav()">&times;</a>
       <router-link to="/" v-if="isLoggedIn">Home</router-link>
           <router-link to="/events" v-if="isLoggedIn">Events</router-link>
-          <router-link to="/messages" v-if="isLoggedIn">Messages</router-link>
+          <router-link to="/messages" v-if="isLoggedIn && type!='Student'">Messages</router-link>
                 <router-link @click="updateNotification()" to="/complains" v-if="isLoggedIn && type !='Teacher'">Complains <span v-if="notification" class="dot"></span></router-link>
                 <router-link to="/common-notices" v-if="isLoggedIn">Common Notices</router-link>
                 <router-link to="/notices" v-if="isLoggedIn">Notices</router-link>

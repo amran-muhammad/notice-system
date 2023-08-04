@@ -45,6 +45,9 @@ export default {
     created() {
         if (window.Laravel.user) {
             this.user = window.Laravel.user
+            if(this.user.type=="Student"){
+              window.location.href = "/";
+            }
             Promise.all([this.get_all_teacher(),this.getChats()])
         }
     },
