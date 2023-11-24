@@ -32,6 +32,7 @@
           <div class="card-body">
             <h6>{{ item.name }}</h6>
             <h6>Email: {{ item.email }}</h6>
+            <p v-if="item.student_id">Designation: {{ item.student_id }}</p>
             <p>Program: {{ item.course }}</p>
             <p>Department: {{ item.department }}</p>
 

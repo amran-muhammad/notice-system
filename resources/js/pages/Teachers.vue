@@ -55,6 +55,7 @@
                                         <option value="EEE">EEE</option>
                                         <option value="BBA">BBA</option>
                                         <option value="English">English</option>
+                                        <option value="Software Engineering">Software Engineering</option>
                                     </select>
                                 </div>
                             </div>
@@ -67,6 +68,21 @@
                                         <option value="Honors & Masters">Honors & Masters</option>
                                         <option value="Honors">Honors</option>
                                         <option value="Masters">Masters</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-1">
+                                <label for="student_id" class="col-sm-4 col-form-label text-md-right"> Designation</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" v-model="form_data.student_id">
+                                        <option value="">Choose...</option>
+                                        <option value="Head">Head</option>
+                                        <option value="Head & Associate Professor">Head & Associate Professor</option>
+                                        <option value="Associate Professor">Associate Professor</option>
+                                        <option value="Assistant Professor">Assistant Professor</option>
+                                        <option value="Lecturer">Lecturer</option>
+                                        <option value="Adjunct Lecturer">Adjunct Lecturer</option>
                                     </select>
                                 </div>
                             </div>
@@ -128,6 +144,7 @@
                                         <option value="EEE">EEE</option>
                                         <option value="BBA">BBA</option>
                                         <option value="English">English</option>
+                                        <option value="Software Engineering">Software Engineering</option>
                                     </select>
                                 </div>
                             </div>
@@ -140,6 +157,20 @@
                                         <option value="Honors & Masters">Honors & Masters</option>
                                         <option value="Honors">Honors</option>
                                         <option value="Masters">Masters</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row mt-1">
+                                <label for="student_id" class="col-sm-4 col-form-label text-md-right"> Designation</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" v-model="edit_data.student_id">
+                                        <option value="">Choose...</option>
+                                        <option value="Head">Head</option>
+                                        <option value="Head & Associate Professor">Head & Associate Professor</option>
+                                        <option value="Associate Professor">Associate Professor</option>
+                                        <option value="Assistant Professor">Assistant Professor</option>
+                                        <option value="Lecturer">Lecturer</option>
+                                        <option value="Adjunct Lecturer">Adjunct Lecturer</option>
                                     </select>
                                 </div>
                             </div>
@@ -205,6 +236,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ item.name }}</h5>
                             <h5 class="card-title">Email: {{ item.email }}</h5>
+                            <p class="card-text" v-if="item.student_id">Designation: {{ item.student_id }}</p>
                             <p class="card-text">Program: {{ item.course }} , {{ item.department }}</p>
                             <p v-if="user.type=='Admin'">{{ item.status }}</p>
                             <div v-if="user.type=='Admin'">
@@ -249,6 +281,7 @@ export default {
                 department: '',
                 course: '',
                 status: '',
+                student_id: '',
                 type: 'Teacher'
             },
             edit_data: {
@@ -260,6 +293,7 @@ export default {
                 department: '',
                 course: '',
                 status: '',
+                student_id: '',
                 type: 'Teacher'
             },
             editStatusModal: ref(false),
@@ -385,6 +419,7 @@ export default {
             this.edit_data.name = item.name
             this.edit_data.department = item.department
             this.edit_data.course = item.course
+            this.edit_data.student_id = item.student_id
             this.edit_data.email = item.email
             this.edit_data.image = item.image ? item.image : null
         },

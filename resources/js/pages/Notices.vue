@@ -34,6 +34,8 @@
                                         <option value="EEE">EEE</option>
                                         <option value="BBA">BBA</option>
                                         <option value="English">English</option>
+                                        <option value="Software Engineering">Software Engineering</option>
+
                                     </select>
                                 </div>
                             </div>
@@ -119,6 +121,7 @@
                                         <option value="EEE">EEE</option>
                                         <option value="BBA">BBA</option>
                                         <option value="English">English</option>
+                                        <option value="Software Engineering">Software Engineering</option>
                                     </select>
                                 </div>
                             </div>
@@ -200,6 +203,7 @@
                                     <option value="EEE">EEE</option>
                                     <option value="BBA">BBA</option>
                                     <option value="English">English</option>
+                                    <option value="Software Engineering">Software Engineering</option>
                                 </select>
                             </div>
                         </div>

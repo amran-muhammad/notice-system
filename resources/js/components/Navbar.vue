@@ -21,6 +21,7 @@
                             <a href="/teachers?department=BBA">Department of BBA</a>
                             <a href="/teachers?department=EEE">Department of EEE</a>
                             <a href="/teachers?department=English">Department of English</a>
+                            <a href="/teachers?department=Software Engineering">Department of Software Engineering</a>
                         </div>
                     </div>
                 <router-link v-if="isLoggedIn && type=='Admin'" to="/students">Students</router-link>
@@ -195,7 +196,7 @@ export default {
 
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  /* padding: 12px 16px; */
   text-decoration: none;
   display: block;
 }
